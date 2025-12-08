@@ -1,0 +1,103 @@
+spring:
+  # 配置数据源
+  datasource:
+    schema:
+      - classpath:sql/sys.sql
+      - classpath:sql/app.sql
+      - classpath:sql/qrtz.sql
+    initialization-mode: never
+    dynamic:
+      primary: master #设置默认的数据源或者数据源组,默认值即为master
+      datasource:
+        master:
+          url: jdbc:mysql://localhost:3306/crud?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC&nullCatalogMeansCurrent=true&autoReconnect=true&allowMultiQueries=true&useSSL=false
+          username: root
+          password: 123456
+          driver-class-name: com.mysql.jdbc.Driver # 3.2.0开始支持SPI可省略此配置
+        slave:
+          url: jdbc:mysql://localhost:3306/crud?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC&nullCatalogMeansCurrent=true&autoReconnect=true&allowMultiQueries=true&useSSL=false
+          username: root
+          password: 123456
+          driver-class-name: com.mysql.jdbc.Driver
+    druid:
+      #监控统计拦截的filters
+      filters: stat,wall,log4j
+      #druid配置
+      #配置初始化大小/最小/最大
+      initialSize: 5
+      minIdle: 5
+      maxActive: 20
+      #获取连接等待超时时间
+      maxWait: 60000
+      #间隔多久进行一次检测，检测需要关闭的空闲连接
+      timeBetweenEvictionRunsMillis: 60000
+      #一个连接在池中最小生存的时间
+      minEvictableIdleTimeMillis: 300000
+      validationQuery: SELECT 1 FROM DUAL
+      testWhileIdle: true
+      testOnBorrow: false
+      testOnReturn: false
+      #打开PSCache，并指定每个连接上PSCache的大小。oracle设为true，mysql设为false。分库分表较多推荐设置为false
+      poolPreparedStatements: false
+      maxPoolPreparedStatementPerConnectionSize: 20
+      # 通过connectProperties属性来打开mergeSql功能；慢SQL记录
+      connect-properties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+  # redis配置
+  redis:
+    ssl: false
+    host: 127.0.0.1
+    port: 6379
+    database: 0
+    timeout: 1000
+    password:
+    lettuce:
+      pool:
+        max-active: 100
+        max-wait: -1
+        min-idle: 0
+        max-idle: 20
+# 是否启用swagger
+swagger:
+  enable: false
+aliyun:
+  oss:
+    endPoint: oss-cn-beijing.aliyuncs.com
+    url: https://platform-application.oss-cn-beijing.aliyuncs.com/
+    accessKeyId: xxx
+    accessKeySecret: xxx
+    bucketName: xxx
+  sms:
+    accessKeyId: xxx
+    accessKeySecret: xxx
+    signName: xxx
+  mail:
+    accessKeyId: xxx #邮件服务 accessKeyId
+    accessKeySecret: xxx #邮件服务 accessKeySecret
+    accountName: xxx #邮件服务 发信地址
+    regionId: cn-hangzhou #邮件服务 区域Id
+    sendPersonName: xxx #邮件服务 发信人昵称(程序无法正常读取中文，若是中文应写到程序中)
+    addressType: 1 #邮件服务  取值范围 0~1: 0 为随机账号；1 为发信地址
+    tagName: xxx #邮件服务 控制台创建的标签
+    replyToAddress: false #邮件服务 回信地址
+    toAddress:  #邮件服务  目标地址
+  vod:
+    accessKeyId: xxx #视频服务 accessKeyId
+    accessKeySecret: xxx #视频服务 accessKeySecret
+# 图片服务器
+minio:
+  endpoint: http://127.0.0.1:9000/
+  accessKey: minioadmin
+  secretKey: minioadmin
+  bucketName: crud
+# 微信配置
+wechat:
+  spbillCreateIp: 127.0.0.1
+  apiKey: xxx
+  mchId: xxx
+  appID: xxx
+  appSecret: xxx
+# QQ配置
+qq:
+  appID: xxxxxxx
+  appSecret: xxxxxxxxxxxxxxxxx
+  redirectUrl: xxxxxxxxxxxxx

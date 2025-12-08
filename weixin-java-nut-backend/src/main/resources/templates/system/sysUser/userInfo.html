@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>设置我的资料</title>
+  <div th:replace="common/link::header"></div>
+</head>
+<body>
+  <div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+      <div class="layui-col-md12">
+        <div class="layui-card">
+          <div class="layui-card-header">设置我的资料</div>
+          <div class="layui-card-body" pad15>
+            <div class="layui-form" lay-filter="sys-user-form" id="sys-user-form">
+              <input type="hidden" name="id" id="id">
+              <div class="layui-form-item">
+                <label class="layui-form-label">昵称</label>
+                <div class="layui-input-inline">
+                  <input type="text" name="nickName" lay-verify="required" class="layui-input">
+                </div>
+              </div>
+              <div class="layui-form-item">
+                <label class="layui-form-label">用户名</label>
+                <div class="layui-input-inline">
+                  <input type="text" name="userName" readonly class="layui-input">
+                </div>
+                <div class="layui-form-mid layui-word-aux">不可修改。一般用于后台登入名</div>
+              </div>
+              <div class="layui-form-item">
+                <label class="layui-form-label">性别</label>
+                <div class="layui-input-block">
+                  <input type="radio" name="sex" value="0" title="男" checked>
+                  <input type="radio" name="sex" value="1" title="女">
+                </div>
+              </div>
+              <div class="layui-form-item">
+                <label class="layui-form-label">头像</label>
+                <div class="layui-input-inline layui-upload">
+                  <input type="hidden" id="avatar" name="avatar">
+                  <div class="layui-upload-list">
+                    <img class="layui-upload-img" onclick="fun.preview(this)" id="upload-img" width="100px" height="100px">
+                    <p id="upload-img-text"></p>
+                  </div>
+                  <div class="layui-btn-group">
+                    <button type="button" class="layui-btn layui-btn-primary" id="upload-img-btn">上传</button>
+                    <button type="button" class="layui-btn layui-btn-primary" id="clear-img-btn">清除</button>
+                  </div>
+                </div>
+              </div>
+              <div class="layui-form-item">
+                <label class="layui-form-label">手机</label>
+                <div class="layui-input-inline">
+                  <input type="text" name="phonenumber" lay-verify="phone" autocomplete="off" class="layui-input">
+                </div>
+              </div>
+              <div class="layui-form-item">
+                <label class="layui-form-label">邮箱</label>
+                <div class="layui-input-inline">
+                  <input type="text" name="email" lay-verify="email" autocomplete="off" class="layui-input">
+                </div>
+              </div>
+              <div class="layui-form-item layui-form-text">
+                <label class="layui-form-label">备注</label>
+                <div class="layui-input-block">
+                  <textarea name="remark" placeholder="请输入内容" class="layui-textarea"></textarea>
+                </div>
+              </div>
+              <div class="layui-form-item">
+                <div class="layui-input-block">
+                  <button class="layui-btn" lay-submit lay-filter="save-submit" id="save-submit">确认修改</button>
+                </div>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<div th:replace="common/script::footer"></div>
+<script th:inline="javascript">
+  layui.config({
+      base: '/static/layuiadmin/' //静态资源所在路径
+  }).extend({
+    index: 'lib/index' //主入口模块
+  }).use(['index', 'set', 'upload','form','crud'],function () {
+      let $ = layui.$,
+              upload = layui.upload,
+              crud = layui.crud,
+              form = layui.form;
+      let sysUser = [[${sysUser}]];
+      $('#upload-img').attr('src', sysUser.avatar); //图片链接（base64）
+      form.val('sys-user-form', sysUser);
+      form.on('submit(save-submit)', function(data) {
+          $.ajax({
+              type: 'POST',
+              url:  ctx + '/system/sysUser/editUserInfo',
+              data: JSON.stringify(data.field),
+              contentType:'application/json;charset=UTF-8',
+              dataType: 'json',
+              success: function(result) {
+                  layer.msg(result.message);
+              }
+          });
+      });
+      //普通图片上传
+      crud.uploadFile("avatar");
+  });
+</script>
+</body>
+</html>

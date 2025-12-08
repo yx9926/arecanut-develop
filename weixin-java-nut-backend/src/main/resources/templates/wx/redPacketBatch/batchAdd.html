@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>批量生成红包批次</title>
+  <div th:replace="common/link::header"></div>
+</head>
+<body>
+<div class="layui-fluid">
+  <div class="layui-card">
+    <div class="layui-card-header">批量生成红包批次</div>
+    <div class="layui-card-body">
+      <div class="layui-row">
+        <div class="layui-form layui-form-pane" lay-filter="batchRedPacketForm" id="batchRedPacketForm">
+          
+          <!-- 批次前缀 -->
+          <div class="layui-form-item">
+            <label class="layui-form-label">批次前缀</label>
+            <div class="layui-input-inline">
+              <input type="text" lay-verify="required" class="layui-input" name="batchPrefix" placeholder="如：ACTIVITY2025" value="BATCH"/>
+            </div>
+            <div class="layui-form-mid layui-word-aux">生成批次ID的前缀，如：BATCH001, BATCH002...</div>
+          </div>
+
+          <!-- 生成数量 -->
+          <div class="layui-form-item">
+            <label class="layui-form-label">生成数量</label>
+            <div class="layui-input-inline">
+              <input type="number" lay-verify="required|number" class="layui-input" name="generateCount" placeholder="请输入要生成的批次数量" value="5" min="1" max="50"/>
+            </div>
+            <div class="layui-form-mid layui-word-aux">一次最多生成50个批次</div>
+          </div>
+
+          <!-- 金额类型选择 -->
+          <div class="layui-form-item">
+            <label class="layui-form-label">金额类型</label>
+            <div class="layui-input-block">
+              <input type="radio" name="amountType" value="random" title="随机金额" checked>
+              <input type="radio" name="amountType" value="fixed" title="固定金额">
+            </div>
+          </div>
+
+          <!-- 金额设置方式 -->
+          <div class="layui-form-item">
+            <label class="layui-form-label">设置方式</label>
+            <div class="layui-input-block">
+              <input type="radio" name="settingType" value="total" title="直接设置总金额" checked>
+              <input type="radio" name="settingType" value="random" title="随机分配金额">
+            </div>
+          </div>
+
+          <!-- 直接设置总金额模式 -->
+          <div class="layui-form-item" id="totalAmountSection">
+            <label class="layui-form-label">批次总金额</label>
+            <div class="layui-input-inline">
+              <input type="number" step="0.01" class="layui-input" name="totalAmount" placeholder="单批次总金额" value="1000.00"/>
+            </div>
+            <label class="layui-form-label">红包数量</label>
+            <div class="layui-input-inline">
+              <input type="number" class="layui-input" name="totalCount" placeholder="每批次红包数量" value="100"/>
+            </div>
+            <div class="layui-form-mid layui-word-aux">系统会自动将总金额随机分配给所有红包</div>
+          </div>
+
+          <!-- 随机分配金额模式 -->
+          <div class="layui-form-item" id="randomSection" style="display: none;">
+            <label class="layui-form-label">批次总金额</label>
+            <div class="layui-input-inline">
+              <input type="number" step="0.01" class="layui-input" name="randomTotalAmount" placeholder="批次总金额" value="1000"/>
+            </div>
+            <label class="layui-form-label">红包数量</label>
+            <div class="layui-input-inline">
+              <input type="number" class="layui-input" name="randomCount" placeholder="红包数量" value="100"/>
+            </div>
+            <div class="layui-form-mid layui-word-aux">系统会自动将总金额随机分配给所有红包</div>
+          </div>
+
+          <!-- 预览区域 -->
+          <div class="layui-form-item" >
+            <label class="layui-form-label">批次预览</label>
+            <div class="layui-input-block">
+              <table class="layui-table" id="previewTable">
+                <thead>
+                  <tr>
+                    <th>批次ID</th>
+                    <th>总金额</th>
+                    <th>红包数量</th>
+                    <th>金额类型</th>
+                  </tr>
+                </thead>
+                <tbody id="previewBody">
+                  <!-- 预览内容将在这里动态生成 -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- 隐藏字段 -->
+          <input type="hidden" name="usedCount" value="0"/>
+          <input type="hidden" name="withdrawnCount" value="0"/>
+          <input type="hidden" name="status" value="0"/>
+          <input type="hidden" name="amountType" id="amountTypeHidden" value="random"/>
+
+          <div class="layui-form-item layui-hide">
+            <input type="button" lay-submit lay-filter="batch-submit" id="batch-submit" value="确认">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div th:replace="common/script::footer"></div>
+<script th:inline="javascript">
+  layui.config({
+        base: '/static/layuiadmin/' //静态资源所在路径
+    }).extend({
+       index: 'lib/index', //主入口模块
+    }).use(['index', 'form','crud'], function(){
+      let $ = layui.$,
+              form = layui.form,
+              crud = layui.crud;
+
+      // 监听金额类型选择
+      form.on('radio(amountType)', function(data) {
+        $('#amountTypeHidden').val(data.value);
+      });
+
+    // 监听设置方式切换
+    form.on('radio(settingType)', function(data) {
+      if (data.value === 'total') {
+        $('#totalAmountSection').show();
+        $('#fixedAmountSection').show();
+        $('#randomSection').hide();
+      } else if (data.value === 'random') {
+        $('#totalAmountSection').hide();
+        $('#fixedAmountSection').hide();
+        $('#randomSection').show();
+      } else {
+        $('#totalAmountSection').hide();
+        $('#fixedAmountSection').show();
+        $('#randomSection').hide();
+      }
+      updatePreview();
+    });
+
+    // 生成唯一批次ID
+    function generateBatchId(prefix, index) {
+      const timestamp = new Date().getTime();
+      const randomStr = Math.random().toString(36).substring(2, 6).toUpperCase();
+      return prefix + timestamp.toString().slice(-6) + randomStr + String(index).padStart(2, '0');
+    }
+
+    // 生成随机金额数组（确保总和等于总金额）
+    function generateRandomAmounts(totalAmount, count) {
+      if (count <= 0) return [];
+      
+      const amounts = [];
+      let remainingAmount = totalAmount;
+      
+      // 先生成count-1个随机金额
+      for (let i = 0; i < count - 1; i++) {
+        // 确保剩下的金额足够分配给剩余的红包（每个至少0.01元）
+        const maxSingle = remainingAmount - (count - 1 - i) * 0.01;
+        const minSingle = 0.01;
+        
+        if (maxSingle <= minSingle) {
+          amounts.push(minSingle);
+          remainingAmount -= minSingle;
+        } else {
+          const amount = minSingle + Math.random() * (maxSingle - minSingle);
+          amounts.push(amount);
+          remainingAmount -= amount;
+        }
+      }
+      
+      // 最后一个红包金额等于剩余金额（确保总和精确匹配）
+      amounts.push(Math.max(0.01, remainingAmount));
+      
+      // 打乱数组顺序，使金额分布更随机
+      for (let i = amounts.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [amounts[i], amounts[j]] = [amounts[j], amounts[i]];
+      }
+      
+      return amounts;
+    }
+
+    // 监听输入变化，更新预览
+    function updatePreview() {
+      const prefix = $('input[name="batchPrefix"]').val() || 'BATCH';
+      const count = parseInt($('input[name="generateCount"]').val()) || 5;
+      const settingType = $('input[name="settingType"]:checked').val();
+      
+      let html = '';
+      for (let i = 1; i <= count; i++) {
+        const batchId = generateBatchId(prefix, i);
+        let totalAmount = 0;
+        let redPacketCount = 0;
+        let mode = '';
+        let amountType = $('input[name="amountType"]:checked').val() || 'random';
+
+        if (settingType === 'total') {
+          totalAmount = parseFloat($('input[name="totalAmount"]').val()) || 1000;
+          redPacketCount = parseInt($('input[name="totalCount"]').val()) || 100;
+          mode = amountType === 'fixed' ? '固定金额' : '随机金额';
+        } else if (settingType === 'random') {
+          totalAmount = parseFloat($('input[name="randomTotalAmount"]').val()) || 1000;
+          redPacketCount = parseInt($('input[name="randomCount"]').val()) || 100;
+          mode = '随机分配';
+        } else {
+          const singleAmount = parseFloat($('input[name="singleAmount"]').val()) || 10;
+          redPacketCount = parseInt($('input[name="redPacketCount"]').val()) || 100;
+          totalAmount = singleAmount * redPacketCount;
+          mode = amountType === 'fixed' ? '固定金额' : '随机金额';
+        }
+
+        html += `
+          <tr>
+            <td>${batchId}</td>
+            <td>¥${totalAmount.toFixed(2)}</td>
+            <td>${redPacketCount}</td>
+            <td>${mode}</td>
+          </tr>
+        `;
+      }
+      
+      $('#previewBody').html(html);
+    }
+
+    // 监听输入变化
+    $('input[name="batchPrefix"], input[name="generateCount"], input[name="totalAmount"], input[name="totalCount"], input[name="singleAmount"], input[name="redPacketCount"], input[name="randomTotalAmount"], input[name="randomCount"]').on('input', updatePreview);
+
+    // 初始化预览
+    updatePreview();
+
+    form.on('submit(batch-submit)', function(data) {
+      const formData = data.field;
+      
+      // 构建批次数据
+      const batches = [];
+      const prefix = formData.batchPrefix || 'BATCH';
+      const count = parseInt(formData.generateCount) || 1;
+      const settingType = formData.settingType;
+
+      for (let i = 1; i <= count; i++) {
+        const batchId = generateBatchId(prefix, i);
+        let totalAmount = 0;
+        let totalCount = 0;
+        let remark = '';
+        let amountType = 'fixed';
+
+        if (settingType === 'total') {
+          totalAmount = parseFloat(formData.totalAmount) || 1000;
+          totalCount = parseInt(formData.totalCount) || 100;
+          remark = '直接设置总金额';
+          amountType = 'fixed';
+        } else if (settingType === 'random') {
+          totalAmount = parseFloat(formData.randomTotalAmount) || 1000;
+          totalCount = parseInt(formData.randomCount) || 100;
+          remark = '随机分配金额';
+          amountType = 'random';
+        } else {
+          const singleAmount = parseFloat(formData.singleAmount) || 10;
+          totalCount = parseInt(formData.redPacketCount) || 100;
+          totalAmount = singleAmount * totalCount;
+          remark = '固定金额计算';
+          amountType = 'fixed';
+        }
+
+        batches.push({
+          batchId: batchId,
+          totalAmount: totalAmount.toFixed(2),
+          totalCount: totalCount,
+          usedCount: 0,
+          withdrawnCount: 0,
+          status: 0,
+          remark: remark,
+          amountType: amountType
+        });
+      }
+
+      $.ajax({
+        type: 'POST',
+        url: ctx + '/wx/redPacketBatch/batchAdd',
+        data: JSON.stringify(batches),
+        contentType: 'application/json;charset=UTF-8',
+        dataType: 'json',
+        success: function(result) {
+          layer.msg(result.message);
+          if (result.code === 0) {
+            let index = parent.layer.getFrameIndex(window.name);
+            parent.layer.close(index);
+            parent.location.reload();
+          }
+        },
+        error: function(xhr, status, error) {
+          layer.msg('批量生成失败：' + error);
+        }
+      });
+      
+      return false;
+    });
+  });
+</script>
+</body>
+</html>

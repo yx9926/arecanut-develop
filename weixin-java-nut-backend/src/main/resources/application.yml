@@ -1,0 +1,151 @@
+server:
+  port: 8080
+  servlet:
+    #session会话超时时间
+    session:
+      timeout: PT5H
+    # 应用的访问路径
+    context-path: /
+  tomcat:
+    uri-encoding: UTF-8
+  max-http-header-size: 65546
+spring:
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+  autoconfigure:
+    # 排除 Druid 自动配置
+    exclude: com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceAutoConfigure
+  mvc:
+    static-path-pattern: /static/**
+  # 多环境配置
+  profiles:
+    active: dev
+  # 服务模块
+  devtools:
+    restart:
+      # 热部署开关
+      enabled: true
+  # 格式化JSON日期
+  jackson:
+   time-zone: GMT+8
+   date-format: yyyy-MM-dd hh:mm:ss
+   default-property-inclusion: always
+  quartz:
+    #相关属性配置
+    properties:
+      org:
+        quartz:
+          scheduler:
+            instanceName: clusteredScheduler
+            instanceId: AUTO
+          jobStore:
+            class: org.quartz.impl.jdbcjobstore.JobStoreTX
+            driverDelegateClass: org.quartz.impl.jdbcjobstore.StdJDBCDelegate
+            tablePrefix: QRTZ_
+            isClustered: true
+            clusterCheckinInterval: 10000
+            useProperties: false
+          threadPool:
+            class: org.quartz.simpl.SimpleThreadPool
+            threadCount: 10
+            threadPriority: 5
+            threadsInheritContextClassLoaderOfInitializingThread: true
+    #数据库方式
+    job-store-type: jdbc
+    #初始化表结构.初次使用的时候会在库中生成表格,后期注释掉即可.或者初始使用值为always,然后将值改为never
+    jdbc:
+      initialize-schema: always
+  main:
+    allow-bean-definition-overriding: true #当遇到同样名字的时候，是否允许覆盖注册
+##############################################
+#
+# thymeleaf静态资源配置
+#
+##############################################
+  thymeleaf:
+    # 默认路径
+    prefix: classpath:/templates/
+    # 后缀
+    suffix: .html
+    # 模版样式
+    mode: HTML5
+    encoding: UTF-8
+    cache: false
+    servlet:
+      content-type: text/html
+##############################################
+#
+# mybatis-plus 配置
+#
+##############################################
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+    auto-mapping-behavior: full
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  mapper-locations: classpath*:mapper/**/*Mapper.xml
+  type-aliases-package: io.github.yangyouwang.module.**.entity
+  global-config:
+    # 逻辑删除配置
+    db-config:
+      # 全局逻辑删除的实体字段名
+      logic-delete-field: deleted
+      # 删除前
+      logic-not-delete-value: 0
+      # 删除后
+      logic-delete-value: 1
+##############################################
+#
+# 分页插件
+#
+##############################################
+pagehelper:
+  helper-dialect: mysql
+  reasonable: true
+  support-methods-arguments: true
+  params: count=countSql
+##############################################
+#
+# 日志配置
+#
+##############################################
+logging:
+   level:
+     io.github: debug
+     org.springframework: warn
+
+# 防止XSS攻击
+xss:
+  # 过滤开关
+  enabled: true
+  # 排除链接（多个用逗号分隔）
+  excludes:
+  # 匹配链接
+  urlPatterns: /system/*,/qrtz/*
+
+
+# 微信配置
+wx:
+  miniapp:
+    configs:
+      - appid: wxd80ab8c97ba36af9
+        secret: 9c2dabe3239be3f0abf5e3820d131697 #微信小程序的Secret
+        token: #微信小程序消息服务器配置的token
+        aesKey: #微信小程序消息服务器配置的EncodingAESKey
+        msgDataFormat: JSON
+  pay:
+    configs:
+      - appId: wxd80ab8c97ba36af9 #微信公众号或者小程序等的appid (V3商户模式需要)
+        mchId: 1723666397 #微信支付商户号 (V3商户模式需要)
+        mchKey: 183E64364F9133B89857700876382BB9 #微信支付商户密钥
+        subAppId: #服务商模式下的子商户公众账号ID
+        subMchId: #服务商模式下的子商户号
+        keyPath: # p12证书的位置，可以指定绝对路径，也可以指定类路径（以classpath:开头）
+        apiV3Key: 7B4E8271E6563E699BD43833AD8FC5F6 # apiV3 秘钥值 (V3商户模式需要)
+        certSerialNo: # apiV3 证书序列号值 (V3商户模式需要)
+        privateCertPath: # apiclient_cert.pem证书文件的绝对路径或者以classpath:开头的类路径. (V3商户模式需要)
+        privateKeyPath: # apiclient_key.pem证书文件的绝对路径或者以classpath:开头的类路径. (V3商户模式需要)
+        publicKeyPath: # 微信支付公钥，pub_key.pem证书文件的绝对路径或者以classpath:开头的类路径. (V3商户模式需要)
+        publicKeyId: # 微信支付公钥ID (V3商户模式需要)

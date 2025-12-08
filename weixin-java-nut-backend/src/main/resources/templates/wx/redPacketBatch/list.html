@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <title>红包批次信息表</title>
+    <div th:replace="common/link::header"></div>
+</head>
+<body>
+<div class="layui-fluid">
+    <div class="layui-card">
+        <form class="layui-form layui-card-header layuiadmin-card-header-auto">
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">批次ID</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="batchId" placeholder="请输入批次ID" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">总金额</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="totalAmount" placeholder="请输入总金额" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">总数量</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="totalCount" placeholder="请输入总数量" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">已使用数量</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="usedCount" placeholder="请输入已使用数量" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">已提现数量</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="withdrawnCount" placeholder="请输入已提现数量" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">批次状态</label>
+                    <div class="layui-input-block">
+                        <select name="status" class="layui-select">
+                            <option value="">全部</option>
+                            <option value="0">未生成</option>
+                            <option value="1">已生成</option>
+                            <option value="2">已过期</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <button type="button" class="layui-btn layuiadmin-btn-useradmin" lay-submit lay-filter="search">
+                        <i class="layui-icon layui-icon-search layuiadmin-button-btn"></i>
+                    </button>
+                    <button type="reset" class="layui-btn layui-btn-primary" lay-submit lay-filter="reset">重置</button>
+                    <button type="button" class="layui-btn" id="generateBtn">生成</button>
+                </div>
+            </div>
+        </form>
+        <div class="layui-card-body">
+            <table id="redPacketBatchTable" lay-filter="redPacketBatchTable"></table>
+            <script type="text/html" id="toolbar">
+                <div class="layui-btn-container">
+                    <a sec:authorize="hasAuthority('redPacketBatch:add')" class="layui-btn layui-btn-xs" lay-event="add"><i class="layui-icon layui-icon-add-1"></i>添加</a>
+                    <a class="layui-btn layui-btn-success layui-btn-xs" lay-event="batchDownloadQrcodes"><i class="layui-icon layui-icon-download-circle"></i>批量下载二维码</a>
+                    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="batchDownloadMiniProgramCode"><i class="layui-icon layui-icon-download-circle"></i>批量下载小程序码</a>
+                    <a sec:authorize="hasAuthority('redPacketBatch:del')" class="layui-btn layui-btn-danger layui-btn-xs" lay-event="removes"><i class="layui-icon layui-icon-delete"></i>删除</a>
+                </div>
+            </script>
+            <script type="text/html" id="tableBar">
+                <a class="layui-btn layui-btn-warm layui-btn-xs" lay-event="detail"><i class="layui-icon layui-icon-list"></i>详情</a>
+                <a class="layui-btn layui-btn-success layui-btn-xs" lay-event="downloadQrcodes"><i class="layui-icon layui-icon-download-circle"></i>下载二维码</a>
+                <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="downloadMiniProgramCode"><i class="layui-icon layui-icon-download-circle"></i>下载小程序码</a>
+                <a sec:authorize="hasAuthority('redPacketBatch:edit')" class="layui-btn layui-btn-normal layui-btn-xs" lay-event="edit"><i class="layui-icon layui-icon-edit"></i>编辑</a>
+                <a sec:authorize="hasAuthority('redPacketBatch:del')" class="layui-btn layui-btn-danger layui-btn-xs" lay-event="remove"><i class="layui-icon layui-icon-delete"></i>删除</a>
+            </script>
+        </div>
+    </div>
+</div>
+<div th:replace="common/script::footer"></div>
+<script th:inline="javascript">
+    layui.config({
+        base: '/static/layuiadmin/' //静态资源所在路径
+    }).extend({
+        index: 'lib/index' //主入口模块
+    }).use(['index', 'useradmin', 'table', 'crud'], function() {
+        let $ = layui.$,
+            form = layui.form,
+            table = layui.table,
+            crud = layui.crud;
+        //监听搜索
+        form.on('submit(search)', function(data) {
+            let field = data.field;
+            //执行重载
+            table.reload('redPacketBatchTable',{
+                where: field
+            });
+        });
+        //监听重置
+        form.on('submit(reset)', function(data) {
+            Object.keys(data.field).forEach(key => (data.field[key] = ''));
+            table.reload('redPacketBatchTable',{
+                where: data.field
+            });
+        });
+        // 查询列表接口
+        table.render({
+            elem: '#redPacketBatchTable'
+            ,toolbar: '#toolbar'
+            ,height: 'full-110'
+            ,url:  ctx + '/wx/redPacketBatch/page'
+            ,cellMinWidth: 80
+            ,page: true //开启分页
+            ,cols: [[ //表头
+                {type: 'checkbox', fixed: 'left'},
+                {field: 'id', title: 'ID', hide:true},
+                {field: 'batchId', title: '批次ID'},
+                {field: 'totalAmount', title: '总金额'},
+                {field: 'totalCount', title: '总数量'},
+                {field: 'usedCount', title: '已使用数量'},
+                {field: 'withdrawnCount', title: '已提现数量'},
+                {field: 'status', title: '批次状态：0-未生成，1-已生成，2-已过期'},
+                {toolbar: '#tableBar', title: '操作', width: 300, align:'center',fixed: 'right'}
+            ]]
+        });
+        //头工具栏事件
+        table.on('toolbar(redPacketBatchTable)', function(obj) {
+            let checkStatus = table.checkStatus(obj.config.id)
+                ,data = checkStatus.data;
+            switch(obj.event) {
+                case 'add':
+                    active.addView();
+                    break;
+                case 'batchDownloadQrcodes':
+                    if (data.length === 0) {
+                        layer.msg('请选择需要下载的批次')
+                    } else {
+                        active.batchDownloadQrcodes(data, false);
+                    }
+                    break;
+                case 'batchDownloadMiniProgramCode':
+                    if (data.length === 0) {
+                        layer.msg('请选择需要下载的批次')
+                    } else {
+                        active.batchDownloadQrcodes(data, true);
+                    }
+                    break;
+                case 'removes':
+                    if (data.length === 0) {
+                        layer.msg('请选择需要删除的行')
+                    } else {
+                        active.removes(data);
+                    }
+                    break;
+            }
+        });
+        //监听行工具事件
+            table.on('tool(redPacketBatchTable)', function(obj) {
+                let data = obj.data //获得当前行数据
+                    ,layEvent = obj.event;
+                if(layEvent === 'detail') {
+                    active.detailView(data.batchId);
+                } else if(layEvent === 'downloadQrcodes') {
+                    active.downloadQrcodes(data.batchId, false);
+                } else if(layEvent === 'downloadMiniProgramCode') {
+                    active.downloadQrcodes(data.batchId, true);
+                } else if(layEvent === 'edit') {
+                    active.editView(data.id);
+                } else if(layEvent === 'remove') {
+                    active.remove(data.id);
+                }
+            });
+        /* 批量生成按钮点击事件 */
+        $('#generateBtn').on('click', function() {
+            layer.open({
+                type: 2
+                ,shade: 0.3
+                ,title: "批量生成红包批次"
+                ,content: ctx + '/wx/redPacketBatch/batchAddPage'
+                ,maxmin: true
+                ,area: ['100%', '100%']
+                ,btn: ['确定', '取消']
+                ,yes: function(index, layero) {
+                    let submit = layero.find('iframe').contents().find('#batch-submit');
+                    submit.trigger('click');
+                }
+            });
+        });
+
+        /* 触发弹层 */
+        let active = {
+            /**
+             * 添加
+             * */
+            addView: function() {
+                layer.open({
+                    type: 2
+                    ,shade: 0.3
+                    ,title: "添加红包批次信息表"
+                    ,content: ctx + '/wx/redPacketBatch/addPage'
+                    ,maxmin: true
+                    ,area: ['100%', '100%']
+                    ,btn: ['确定', '取消']
+                    ,yes: function(index, layero) {
+                        let submit = layero.find('iframe').contents().find('#save-submit');
+                        submit.trigger('click');
+                    }
+                });
+            },
+            /**
+             * 查看详情
+             * @param batchId 批次ID
+             * */
+            detailView: function(batchId) {
+                layer.open({
+                    type: 2
+                    ,shade: 0.3
+                    ,title: '红包批次详情'
+                    ,content: ctx + '/wx/redPacketBatch/detailPage/' + batchId
+                    ,maxmin: true
+                    ,area: ['80%', '90%']
+                    ,btn: ['关闭']
+                });
+            },
+            /**
+             * 编辑
+             * @param id id
+             * */
+            editView: function(id) {
+                layer.open({
+                    type: 2
+                    ,shade: 0.3
+                    ,title: '修改红包批次信息表'
+                    ,content: ctx + '/wx/redPacketBatch/editPage/' + id
+                    ,maxmin: true
+                    ,area: ['100%', '100%']
+                    ,btn: ['确定', '取消']
+                    ,yes: function(index, layero) {
+                        let submit = layero.find('iframe').contents().find('#save-submit');
+                        submit.trigger('click');
+                    }
+                });
+            },
+            /**
+             * 删除单个条目
+             * @param id id
+             */
+            remove: function(id) {
+                layer.confirm('真的删除行么', function(index) {
+                    //向服务端发送删除指令
+                    $.ajax({
+                        type: 'DELETE',
+                        url:  ctx + '/wx/redPacketBatch/remove/' + id,
+                        contentType:'application/json;charset=UTF-8',
+                        dataType: 'json',
+                        success: function(result) {
+                            layer.msg(result.message);
+                            if (result.code === 0) {
+                                layer.close(index);
+                                table.reload('redPacketBatchTable');
+                            }
+                        }
+                    });
+                });
+            },
+            /**
+             * 下载二维码文件夹
+             * @param batchId 批次ID
+             * @param isMiniProgram 是否下载小程序码
+             */
+            downloadQrcodes: function(batchId, isMiniProgram) {
+                let loadingIndex = layer.msg('正在生成下载文件，请稍候...', {icon: 16, time: 0});
+                
+                // 构建下载URL
+                let downloadUrl = ctx + '/wx/redPacketBatch/' + batchId + '/download-qrcodes';
+                if (isMiniProgram) {
+                    downloadUrl += '?miniProgramCode=true';
+                }
+                
+                // 创建隐藏的iframe进行下载
+                let iframe = document.createElement('iframe');
+                iframe.style.display = 'none';
+                iframe.src = downloadUrl;
+                document.body.appendChild(iframe);
+                
+                // 监听iframe加载完成
+                iframe.onload = function() {
+                    layer.close(loadingIndex);
+                    document.body.removeChild(iframe);
+                };
+                
+                // 设置超时处理
+                setTimeout(function() {
+                    layer.close(loadingIndex);
+                    if (document.body.contains(iframe)) {
+                        document.body.removeChild(iframe);
+                    }
+                }, 10000);
+            },
+            /**
+             * 批量下载二维码文件夹
+             * @param data 选中的批次数据数组
+             * @param isMiniProgram 是否下载小程序码
+             */
+            batchDownloadQrcodes: function(data, isMiniProgram) {
+                if (!data || data.length === 0) {
+                    layer.msg('请选择需要下载的批次');
+                    return;
+                }
+
+                let batchIds = data.map(item => item.batchId).join(',');
+                let typeText = isMiniProgram ? '小程序码' : '二维码';
+                
+                layer.confirm(`确定要批量下载 ${data.length} 个批次的${typeText}吗？`, 
+                    {title: '批量下载确认'}, 
+                    function(index) {
+                        let loadingIndex = layer.msg(`正在批量生成${typeText}，请稍候...`, {icon: 16, time: 0});
+                        
+                        // 构建批量下载URL
+                        let downloadUrl = ctx + '/wx/redPacketBatch/batch-download-qrcodes?batchIds=' + encodeURIComponent(batchIds);
+                        if (isMiniProgram) {
+                            downloadUrl += '&miniProgramCode=true';
+                        }
+                        
+                        // 创建隐藏的iframe进行下载
+                        let iframe = document.createElement('iframe');
+                        iframe.style.display = 'none';
+                        iframe.src = downloadUrl;
+                        document.body.appendChild(iframe);
+                        
+                        // 监听iframe加载完成
+                        iframe.onload = function() {
+                            layer.close(loadingIndex);
+                            document.body.removeChild(iframe);
+                            layer.close(index);
+                        };
+                        
+                        // 设置超时处理（批量下载可能需要更长时间）
+                        setTimeout(function() {
+                            layer.close(loadingIndex);
+                            if (document.body.contains(iframe)) {
+                                document.body.removeChild(iframe);
+                            }
+                            layer.close(index);
+                        }, 30000);
+                    }
+                );
+            },
+            /**
+             * 批量删除
+             * @param obj 对象
+             */
+            removes: function(obj) {
+                let ids = fun.objToArrIds(obj);
+                layer.confirm('真的删除行么', function(index) {
+                    //向服务端发送删除指令
+                    $.ajax({
+                        type: 'POST',
+                        url:  ctx + '/wx/redPacketBatch/removes',
+                        data: JSON.stringify(ids),
+                        contentType:'application/json;charset=UTF-8',
+                        dataType: 'json',
+                        success: function(result) {
+                            layer.msg(result.message);
+                            if (result.code === 0) {
+                                layer.close(index);
+                                table.reload('redPacketBatchTable');
+                            }
+                        }
+                    });
+                });
+            },
+        }
+    });
+</script>
+</body>
+</html>

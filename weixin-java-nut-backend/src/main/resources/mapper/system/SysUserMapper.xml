@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="io.github.yangyouwang.module.system.mapper.SysUserMapper">
+  <resultMap id="BaseResultMap" type="io.github.yangyouwang.module.system.entity.SysUser">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="dept_id" jdbcType="BIGINT" property="deptId" />
+    <result column="nick_name" jdbcType="VARCHAR" property="nickName" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="pass_word" jdbcType="VARCHAR" property="passWord" />
+    <result column="enabled" jdbcType="CHAR" property="enabled" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="phonenumber" jdbcType="VARCHAR" property="phonenumber" />
+    <result column="sex" jdbcType="CHAR" property="sex" />
+    <result column="avatar" jdbcType="VARCHAR" property="avatar" />
+    <result column="create_by" jdbcType="VARCHAR" property="createBy" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_by" jdbcType="VARCHAR" property="updateBy" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="role_id" jdbcType="VARCHAR" property="roleIds" />
+    <result column="post_id" jdbcType="VARCHAR" property="postIds" />
+    <result column="dept_name" jdbcType="VARCHAR" property="deptName" />
+    <result column="post_name" jdbcType="VARCHAR" property="postName" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, dept_id, nick_name, user_name, pass_word, enabled, email, phonenumber, sex, avatar, create_by, create_time,
+    update_by, update_time, remark
+  </sql>
+   <select id="findUserByName" resultMap="BaseResultMap">
+       select
+           u.id,u.dept_id,u.nick_name,u.user_name,u.pass_word,u.enabled,
+           group_concat(ur.role_id) as role_id
+       from sys_user u
+                left join sys_user_role ur on u.id = ur.user_id
+       where u.deleted = 0 and u.user_name = #{userName}
+       group by u.id
+  </select>
+  <select id="findUserByUserId" resultMap="BaseResultMap">
+      select
+          u.id,u.dept_id,u.nick_name,u.user_name,u.enabled,u.email,u.phonenumber,u.sex,u.avatar,u.remark,d.dept_name,
+          group_concat(r.id) as role_id,group_concat(p.id) as post_id,u.create_by, u.create_time
+      from sys_user u
+               left join sys_dept d on u.dept_id = d.id
+               left join sys_user_role ur on u.id = ur.user_id
+               left join sys_role r on ur.role_id = r.id
+               left join sys_user_post up on u.id = up.user_id
+               left join sys_post p on up.post_id = p.id
+      where u.deleted = 0 and u.id = #{id}
+      group by u.id
+  </select>
+  <select id="findUserList" resultMap="BaseResultMap">
+      select
+          u.id,u.nick_name,u.avatar,u.user_name,u.email,u.phonenumber,u.sex,d.dept_name,
+          group_concat(p.post_name) as post_name,u.enabled,u.remark,u.create_by,u.create_time
+      from sys_user u
+               left join sys_dept d on u.dept_id = d.id
+               left join sys_user_post up on u.id = up.user_id
+               left join sys_post p on up.post_id = p.id
+      where u.deleted = 0
+      <if test="ew != null">
+          <if test="ew.nonEmptyOfWhere">
+              AND
+          </if>
+          ${ew.sqlSegment}
+      </if>
+      group by u.id
+      order by u.create_time desc
+  </select>
+</mapper>

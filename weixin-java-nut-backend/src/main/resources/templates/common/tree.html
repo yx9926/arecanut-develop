@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>选择</title>
+    <div th:replace="common/link::header"></div>
+</head>
+<body>
+<div class="layui-fluid">
+    <div class="layui-card">
+        <div class="layui-card-body">
+            <div id="deptTree" class="ztree"></div>
+        </div>
+    </div>
+</div>
+<div th:replace="common/script::footer"></div>
+<script th:inline="javascript">
+    let result = {
+        id: 0,
+        name: '顶级'
+    };
+    layui.config({
+        base: '/static/layuiadmin/' //静态资源所在路径
+    }).extend({
+        index: 'lib/index', //主入口模块
+    }).use(['index', 'form','crud'], function(){
+        let $ = layui.$,
+            form = layui.form,
+            crud = layui.crud,
+            url = [[${url}]];
+        $.ajax({
+            type: "get",
+            url: ctx + url,
+            success: function(res) {
+                let data = res.data;
+                if(data.length == 0) {
+                    layer.msg('暂无列表数据')
+                } else {
+                    let zTree = $.fn.zTree.init($("#deptTree"), fun.setting(function (event,treeId,treeNode) {
+                        result = treeNode;
+                    }), data);
+                    zTree.expandAll(true);
+                }
+            }
+        });
+    });
+    function getData() {
+        return result;
+    }
+</script>
+</body>
+</html>

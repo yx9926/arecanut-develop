@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>红包批次详情</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" th:href="@{/static/layui/css/layui.css}" media="all">
+    <style>
+        .detail-container {
+            padding: 20px;
+        }
+        .detail-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        .detail-item {
+            margin-bottom: 15px;
+        }
+        .detail-label {
+            display: inline-block;
+            width: 120px;
+            font-weight: bold;
+            color: #666;
+        }
+        .detail-value {
+            display: inline-block;
+            color: #333;
+        }
+        .detail-section {
+            margin-top: 30px;
+            border-top: 1px solid #eee;
+            padding-top: 20px;
+        }
+        .detail-section-title {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+<div class="detail-container">
+    <div class="detail-title">红包批次详情</div>
+    
+    <div class="detail-item">
+        <span class="detail-label">批次ID：</span>
+        <span class="detail-value" th:text="${redPacketBatch.batchId}"></span>
+    </div>
+    
+    <div class="detail-item">
+        <span class="detail-label">总金额：</span>
+        <span class="detail-value" th:text="${#numbers.formatDecimal(redPacketBatch.totalAmount, 1, 2)}"></span>
+        <span class="detail-value">元</span>
+    </div>
+    
+    <div class="detail-item">
+        <span class="detail-label">总数量：</span>
+        <span class="detail-value" th:text="${redPacketBatch.totalCount}"></span>
+        <span class="detail-value">个</span>
+    </div>
+    
+    <div class="detail-item">
+        <span class="detail-label">金额类型：</span>
+        <span class="detail-value" th:text="${redPacketBatch.amountType == 'fixed' ? '固定金额' : '随机金额'}"></span>
+    </div>
+    
+    <div class="detail-item">
+        <span class="detail-label">创建时间：</span>
+        <span class="detail-value" th:text="${#dates.format(redPacketBatch.createTime, 'yyyy-MM-dd HH:mm:ss')}"></span>
+    </div>
+    
+    <div class="detail-item">
+        <span class="detail-label">状态：</span>
+        <span class="detail-value">
+            <span th:if="${redPacketBatch.status == 0}" style="color: #ff9800;">待生成</span>
+            <span th:if="${redPacketBatch.status == 1}" style="color: #4caf50;">已生成</span>
+            <span th:if="${redPacketBatch.status == 2}" style="color: #f44336;">已撤销</span>
+        </span>
+    </div>
+    
+    <div class="detail-section">
+        <div class="detail-section-title">二维码信息</div>
+        <table class="layui-table" lay-even>
+            <colgroup>
+                <col width="150">
+                <col width="120">
+                <col width="150">
+                <col width="120">
+                <col>
+            </colgroup>
+            <thead>
+                <tr>
+                    <th>金额</th>
+                    <th>状态</th>
+                    <th>领取时间</th>
+                    <th>领取用户</th>
+                    <th>小程序地址</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="qrcode : ${redPacketBatch.qrcodes}">
+                    <td th:text="${#numbers.formatDecimal(qrcode.amount, 1, 2)}"></td>
+                    <td>
+                        <span th:if="${qrcode.status == 0}" style="color: #4caf50;">待领取</span>
+                        <span th:if="${qrcode.status == 1}" style="color: #2196f3;">已领取</span>
+                        <span th:if="${qrcode.status == 2}" style="color: #f44336;">已撤销</span>
+                    </td>
+                    <td>
+                        <span th:if="${qrcode.usedTime != null}" th:text="${#dates.format(qrcode.usedTime, 'yyyy-MM-dd HH:mm')}"></span>
+                        <span th:if="${qrcode.usedTime == null}">-</span>
+                    </td>
+                    <td>
+                        <span th:if="${qrcode.userId != null}" th:text="${qrcode.userId}"></span>
+                        <span th:if="${qrcode.userId == null}">-</span>
+                    </td>
+                    <td>
+                        <span th:text="${'/pages/redPacket/redPacket?hid=' + qrcode.qrcodeId}" style="word-break: break-all; max-width: 200px; display: inline-block;"></span>
+                    </td>
+                </tr>
+                <tr th:if="${#lists.isEmpty(redPacketBatch.qrcodes)}">
+                    <td colspan="5" style="text-align: center; color: #999;">暂无二维码数据</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="detail-section" th:if="${not #lists.isEmpty(redPacketBatch.qrcodes)}">
+        <div class="detail-section-title">统计信息</div>
+        <div class="detail-item">
+            <span class="detail-label">已领取数量：</span>
+            <span class="detail-value" th:text="${#lists.size(redPacketBatch.qrcodes.?[status == 1])}"></span>
+            <span class="detail-value">个</span>
+        </div>
+        <div class="detail-item">
+            <span class="detail-label">待领取数量：</span>
+            <span class="detail-value" th:text="${#lists.size(redPacketBatch.qrcodes.?[status == 0])}"></span>
+            <span class="detail-value">个</span>
+        </div>
+        <div class="detail-item">
+            <span class="detail-label">已领取金额：</span>
+            <span class="detail-value" th:text="${#numbers.formatDecimal(#aggregates.sum(redPacketBatch.qrcodes.?[status == 1], 'amount'), 1, 2)}"></span>
+            <span class="detail-value">元</span>
+        </div>
+    </div>
+    
+    <div class="detail-section" th:if="${not #lists.isEmpty(redPacketBatch.qrcodes)}">
+        <div class="detail-section-title">二维码下载</div>
+        <div style="margin: 20px 0;">
+            <button type="button" class="layui-btn layui-btn-normal" 
+                    th:onclick="'downloadQrcodes(' + ${redPacketBatch.batchId} + ', \'' + ${redPacketBatch.name} + '\', false)'">
+                <i class="layui-icon layui-icon-download-circle"></i>
+                下载二维码文件夹
+            </button>
+            <button type="button" class="layui-btn layui-btn-warm" 
+                    th:onclick="'downloadQrcodes(' + ${redPacketBatch.batchId} + ', \'' + ${redPacketBatch.name} + '\', true)'">
+                <i class="layui-icon layui-icon-download-circle"></i>
+                下载小程序码文件夹
+            </button>
+        </div>
+        <div style="color: #666; font-size: 12px; margin-top: 10px;">
+            <p>✅ 零存储实时生成，自动创建批次文件夹</p>
+            <p>✅ 文件名格式：序号_金额_二维码ID.png</p>
+            <p>✅ 包含批次说明文件，方便管理</p>
+        </div>
+    </div>
+</div>
+
+<script th:src="@{/static/layui/layui.js}"></script>
+<script>
+    layui.use(['layer', 'table'], function(){
+        var layer = layui.layer;
+        var table = layui.table;
+        
+        // 下载二维码文件夹
+        window.downloadQrcodes = function(batchId, batchName, isMiniProgram) {
+            layer.confirm('确认下载批次"' + batchName + '"的所有二维码？', {
+                title: '下载确认',
+                btn: ['确认下载', '取消']
+            }, function(index) {
+                layer.close(index);
+                
+                var loading = layer.load(2, {
+                    shade: [0.3, '#000'],
+                    content: '正在生成二维码文件夹...'
+                });
+                
+                // 创建下载链接
+                var url = '/wx/redPacketBatch/' + batchId + '/download-qrcodes';
+                if (isMiniProgram) {
+                    url += '?miniProgramCode=true';
+                }
+                
+                // 创建隐藏的下载链接
+                var link = document.createElement('a');
+                link.href = url;
+                link.download = '红包批次' + batchId + '_' + batchName + '.zip';
+                link.style.display = 'none';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                
+                layer.close(loading);
+                layer.msg('下载已开始，请等待浏览器完成', {icon: 1, time: 2000});
+            });
+        };
+        
+        // 关闭按钮
+        if (window != top) {
+            top.layer.closeAll('iframe');
+        }
+    });
+</script>
+</body>
+</html>

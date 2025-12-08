@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>添加菜单</title>
+  <div th:replace="common/link::header"></div>
+</head>
+<body>
+<div class="layui-fluid">
+  <div class="layui-card">
+    <div class="layui-card-header">基本信息</div>
+    <div class="layui-card-body">
+      <div class="layui-row">
+        <div class="layui-form layui-form-pane" lay-filter="sys-menu-form" id="sys-menu-form">
+          <div class="layui-form-item">
+            <div class="layui-inline">
+              <label class="layui-form-label">菜单名称</label>
+              <div class="layui-input-inline">
+                <input type="text" name="menuName" lay-verify="required" placeholder="请输入菜单名称" class="layui-input">
+              </div>
+            </div>
+            <div class="layui-inline">
+              <label class="layui-form-label">上级菜单</label>
+              <div class="layui-input-inline">
+                <div class="layui-row">
+                  <div class="layui-col-md9">
+                    <input name="parentId" type="hidden" value="0">
+                    <input name="parentName" type="text" class="layui-input layui-disabled" placeholder="顶级" disabled>
+                  </div>
+                  <div class="layui-col-md3">
+                    <button type="button" class="layui-btn layui-btn-primary menuWizard">选择</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="layui-form-item">
+            <div class="layui-inline">
+              <label class="layui-form-label">请求地址</label>
+              <div class="layui-input-inline">
+                <input type="text" name="url" lay-verify="required" placeholder="请输入请求地址" class="layui-input">
+              </div>
+            </div>
+            <div class="layui-inline">
+              <label class="layui-form-label">菜单类型</label>
+              <div class="layui-input-inline">
+                <select lay-filter="menuType" name="menuType" id="menuType"></select>
+              </div>
+            </div>
+          </div>
+          <div class="layui-form-item">
+            <div class="layui-inline">
+              <label class="layui-form-label">权限标识</label>
+              <div class="layui-input-inline">
+                <input type="text" name="perms" placeholder="请输入权限标识" class="layui-input">
+              </div>
+            </div>
+            <div class="layui-inline">
+              <label class="layui-form-label">选择图标</label>
+              <div class="layui-input-inline">
+                <input type="text" id="iconPicker" name="icon" lay-filter="iconPicker" class="layui-input">
+              </div>
+            </div>
+          </div>
+          <div class="layui-form-item">
+            <div class="layui-inline">
+              <label class="layui-form-label">显示顺序</label>
+              <div class="layui-input-inline">
+                <input type="number" name="orderNum" lay-verify="required" placeholder="请输入显示顺序" class="layui-input">
+              </div>
+            </div>
+            <div class="layui-inline">
+              <label class="layui-form-label">菜单状态</label>
+              <div class="layui-input-inline" id="visible"></div>
+            </div>
+          </div>
+          <div class="layui-form-item layui-form-text">
+            <label class="layui-form-label">备注</label>
+            <div class="layui-input-block">
+              <textarea class="layui-textarea" name="remark" placeholder="请输入备注"></textarea>
+            </div>
+          </div>
+          <div class="layui-form-item layui-hide">
+            <input type="button" lay-submit lay-filter="save-submit" id="save-submit" value="确认">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div th:replace="common/script::footer"></div>
+<script th:inline="javascript">
+  layui.config({
+      base: '/static/layuiadmin/' //静态资源所在路径
+  }).extend({
+    index: 'lib/index' //主入口模块
+  }).use(['index', 'form','treeSelect','crud','iconPicker'], function(){
+    let $ = layui.$,
+     treeSelect= layui.treeSelect,
+     crud = layui.crud,
+     iconPicker = layui.iconPicker,
+     form = layui.form;
+    form.val('sys-menu-form', {
+      parentId: [[${parentId}]],
+      parentName: [[${parentName}]]
+    });
+    form.on('submit(save-submit)', function(data){
+        $.ajax({
+            type: 'POST',
+            url:  ctx + '/system/sysMenu/add',
+            data: JSON.stringify(data.field),
+            contentType:'application/json;charset=UTF-8',
+            dataType: 'json',
+            success: function(result) {
+                layer.msg(result.message);
+                if (result.code === 0) {
+                    let index = parent.layer.getFrameIndex(window.name);
+                    // 关闭
+                    parent.layer.close(index);
+                    // 刷新
+                    parent.location.reload();
+                }
+            }
+        });
+    });
+    // 菜单向导
+    $('.menuWizard').on('click', function () {
+      // 树结构向导
+      crud.treeWizard("/system/sysMenu/treeSelect",function (result) {
+        form.val('sys-menu-form', {
+          parentId: result.id,
+          parentName: result.name
+        });
+      });
+    });
+    crud.setSelect("menuType","menuType",'M');
+    crud.setRadio("visible","enabled","Y");
+    iconPicker.render({
+      // 选择器，推荐使用input
+      elem: '#iconPicker',
+      // 数据类型：fontClass/unicode，推荐使用fontClass
+      type: 'fontClass',
+      // 是否开启搜索：true/false
+      search: true,
+      // 是否开启分页
+      page: true,
+      // 每页显示数量，默认12
+      limit: 12,
+      // 点击回调
+      click: function (data) {
+        $("#iconPicker").val(data.icon);
+      }
+    });
+  });
+</script>
+</body>
+</html>

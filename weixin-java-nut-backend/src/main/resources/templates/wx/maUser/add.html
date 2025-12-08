@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>添加微信小程序用户表</title>
+  <div th:replace="common/link::header"></div>
+</head>
+<body>
+<div class="layui-fluid">
+  <div class="layui-card">
+    <div class="layui-card-header">基本信息</div>
+    <div class="layui-card-body">
+      <div class="layui-row">
+        <div class="layui-form layui-form-pane" lay-filter="maUserForm" id="maUserForm">
+            <div class="layui-form-item">
+              <label class="layui-form-label">小程序appid</label>
+              <div class="layui-input-inline">
+                <input type="text" lay-verify="required" class="layui-input" name="appid" placeholder="请输入小程序appid"/>
+              </div>
+            </div>
+            <div class="layui-form-item">
+              <label class="layui-form-label">用户唯一标识</label>
+              <div class="layui-input-inline">
+                <input type="text" lay-verify="required" class="layui-input" name="openid" placeholder="请输入用户唯一标识"/>
+              </div>
+            </div>
+            <div class="layui-form-item">
+              <label class="layui-form-label">会话密钥</label>
+              <div class="layui-input-inline">
+                <input type="text" lay-verify="required" class="layui-input" name="sessionKey" placeholder="请输入会话密钥"/>
+              </div>
+            </div>
+            <div class="layui-form-item">
+              <label class="layui-form-label">用户昵称</label>
+              <div class="layui-input-inline">
+                <input type="text" lay-verify="required" class="layui-input" name="nickName" placeholder="请输入用户昵称"/>
+              </div>
+            </div>
+            <div class="layui-form-item">
+              <label class="layui-form-label">用户头像URL</label>
+              <div class="layui-input-inline">
+                <input type="text" lay-verify="required" class="layui-input" name="avatarUrl" placeholder="请输入用户头像URL"/>
+              </div>
+            </div>
+            <div class="layui-form-item">
+              <label class="layui-form-label">性别 0-未知、1-男、2-女</label>
+              <div class="layui-input-inline">
+                <input type="text" lay-verify="required" class="layui-input" name="gender" placeholder="请输入性别 0-未知、1-男、2-女"/>
+              </div>
+            </div>
+            <div class="layui-form-item">
+              <label class="layui-form-label">手机号码</label>
+              <div class="layui-input-inline">
+                <input type="text" lay-verify="required" class="layui-input" name="phoneNumber" placeholder="请输入手机号码"/>
+              </div>
+            </div>
+            <div class="layui-form-item">
+              <label class="layui-form-label">国家/地区</label>
+              <div class="layui-input-inline">
+                <input type="text" lay-verify="required" class="layui-input" name="country" placeholder="请输入国家/地区"/>
+              </div>
+            </div>
+            <div class="layui-form-item">
+              <label class="layui-form-label">省份</label>
+              <div class="layui-input-inline">
+                <input type="text" lay-verify="required" class="layui-input" name="province" placeholder="请输入省份"/>
+              </div>
+            </div>
+            <div class="layui-form-item">
+              <label class="layui-form-label">城市</label>
+              <div class="layui-input-inline">
+                <input type="text" lay-verify="required" class="layui-input" name="city" placeholder="请输入城市"/>
+              </div>
+            </div>
+            <div class="layui-form-item">
+              <label class="layui-form-label">语言</label>
+              <div class="layui-input-inline">
+                <input type="text" lay-verify="required" class="layui-input" name="language" placeholder="请输入语言"/>
+              </div>
+            </div>
+            <div class="layui-form-item">
+              <label class="layui-form-label">用户状态 0-正常、1-禁用</label>
+              <div class="layui-input-inline">
+                <input type="text" lay-verify="required" class="layui-input" name="status" placeholder="请输入用户状态 0-正常、1-禁用"/>
+              </div>
+            </div>
+            <div class="layui-form-item">
+              <label class="layui-form-label">余额</label>
+              <div class="layui-input-inline">
+                <input type="text" lay-verify="required" class="layui-input" name="balance" placeholder="请输入余额"/>
+              </div>
+            </div>
+            <div class="layui-form-item">
+              <label class="layui-form-label">删除标志 0-未删除、1-已删除</label>
+              <div class="layui-input-inline">
+                <input type="text" lay-verify="required" class="layui-input" name="delFlag" placeholder="请输入删除标志 0-未删除、1-已删除"/>
+              </div>
+            </div>
+          <div class="layui-form-item layui-form-text">
+            <label class="layui-form-label">备注</label>
+            <div class="layui-input-block">
+              <textarea class="layui-textarea" name="remark" placeholder="请输入备注"></textarea>
+            </div>
+          </div>
+          <div class="layui-form-item">
+            <div class="layui-inline">
+              <label class="layui-form-label">创建者</label>
+              <div class="layui-input-inline">
+                <input type="text" class="layui-input layui-disabled" name="createBy" disabled="disabled"/>
+              </div>
+            </div>
+            <div class="layui-inline">
+              <label class="layui-form-label">创建时间</label>
+              <div class="layui-input-inline">
+                <input type="text" class="layui-input layui-disabled" name="createTime" disabled="disabled"/>
+              </div>
+            </div>
+          </div>
+          <div class="layui-form-item layui-hide">
+            <input type="button" lay-submit lay-filter="save-submit" id="save-submit" value="确认">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div th:replace="common/script::footer"></div>
+<script th:inline="javascript">
+  layui.config({
+      base: '/static/layuiadmin/' //静态资源所在路径
+  }).extend({
+     index: 'lib/index', //主入口模块
+  }).use(['index', 'form','crud'], function(){
+    let $ = layui.$,
+            form = layui.form,
+            crud = layui.crud;
+    form.on('submit(save-submit)', function(data) {
+      $.ajax({
+        type: 'POST',
+        url:  ctx + '/wx/maUser/add',
+        data: JSON.stringify(data.field),
+        contentType:'application/json;charset=UTF-8',
+        dataType: 'json',
+        success: function(result) {
+          layer.msg(result.message);
+          if (result.code === 0) {
+            let index = parent.layer.getFrameIndex(window.name);
+            // 关闭
+            parent.layer.close(index);
+            // 刷新
+            parent.location.reload();
+          }
+        }
+      });
+    });
+  });
+</script>
+</body>
+</html>

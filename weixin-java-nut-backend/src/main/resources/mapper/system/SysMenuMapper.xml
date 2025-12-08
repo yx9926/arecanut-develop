@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="io.github.yangyouwang.module.system.mapper.SysMenuMapper">
+  <resultMap id="BaseResultMap" type="io.github.yangyouwang.module.system.entity.SysMenu">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="menu_name" jdbcType="VARCHAR" property="menuName" />
+    <result column="parent_id" jdbcType="BIGINT" property="parentId" />
+    <result column="parent_name" jdbcType="VARCHAR" property="parentName" />
+    <result column="order_num" jdbcType="INTEGER" property="orderNum" />
+    <result column="icon" jdbcType="VARCHAR" property="icon" />
+    <result column="url" jdbcType="VARCHAR" property="url" />
+    <result column="menu_type" jdbcType="CHAR" property="menuType" />
+    <result column="visible" jdbcType="CHAR" property="visible" />
+    <result column="perms" jdbcType="VARCHAR" property="perms" />
+    <result column="create_by" jdbcType="VARCHAR" property="createBy" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_by" jdbcType="VARCHAR" property="updateBy" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, menu_name, parent_id, order_num, icon, url, menu_type, visible, perms, create_by, create_time,
+    update_by, update_time, remark
+  </sql>
+  <!-- 根据菜单类型和状态查询菜单 -->
+  <select id="findMenu" resultMap="BaseResultMap">
+    select distinct m.id, m.parent_id, m.menu_name, m.url, m.visible, ifnull(m.perms,'') as perms, m.menu_type, m.order_num, m.icon,m.create_by, m.create_time, m.update_by, m.update_time, m.remark
+    from sys_menu m
+    where m.deleted = 0 and m.menu_type in ('M', 'C') and m.visible = 'Y'
+    order by m.parent_id, m.order_num
+  </select>
+  <!-- 根据用户id查询菜单 -->
+  <select id="findMenuByUserId" parameterType="long" resultMap="BaseResultMap">
+    select distinct m.id, m.parent_id, m.menu_name, m.url, m.visible, ifnull(m.perms,'') as perms, m.menu_type, m.order_num, m.icon, m.create_by, m.create_time, m.update_by, m.update_time, m.remark
+    from sys_menu m
+    left join sys_role_menu rm on m.id = rm.menu_id
+    left join sys_user_role ur on rm.role_id = ur.role_id
+    where m.deleted = 0 and ur.user_id = #{userId} and m.menu_type in ('M', 'C') and m.visible = 'Y'
+    order by m.parent_id, m.order_num
+  </select>
+  <!-- 根据角色查询菜单权限 -->
+  <select id="findMenuPermsByRoleIds" resultType="java.lang.String">
+    select m.perms
+    from sys_menu m
+    left join sys_role_menu rm on m.id = rm.menu_id
+    where m.deleted = 0
+        and m.visible = 'Y'
+        and m.perms &lt;&gt; ''
+        and rm.role_id in
+      <foreach collection="array" index="index" item="item" open="(" separator="," close=")">
+          #{item}
+      </foreach>
+  </select>
+  <!-- 查询所有菜单权限 -->
+  <select id="findMenuPerms" resultType="java.lang.String">
+    select perms from sys_menu where deleted = 0 and visible = 'Y' and perms &lt;&gt; ''
+  </select>
+  <select id="info" resultMap="BaseResultMap">
+    select sm.id, sm.menu_name, sm.parent_id, sm.order_num, sm.icon, sm.url, sm.menu_type, sm.visible,
+           sm.perms, sm.create_by, sm.create_time,sm.update_by, sm.update_time, sm.remark, child.menu_name as parent_name
+    from sys_menu sm
+    left join sys_menu child on sm.parent_id = child.id
+    where sm.id = #{id}
+  </select>
+</mapper>

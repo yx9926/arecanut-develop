@@ -11,15 +11,15 @@ spring:
       primary: master #设置默认的数据源或者数据源组,默认值即为master
       datasource:
         master:
-          url: jdbc:mysql://localhost:3306/trecanut?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC&nullCatalogMeansCurrent=true&autoReconnect=true&allowMultiQueries=true&useSSL=false
-          username: root
-          password: Bo_123456
-          driver-class-name: com.mysql.jdbc.Driver # 3.2.0开始支持SPI可省略此配置
-        slave:
-          url: jdbc:mysql://localhost:3306/trecanut?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC&nullCatalogMeansCurrent=true&autoReconnect=true&allowMultiQueries=true&useSSL=false
-          username: root
-          password: Bo_123456
+          url: jdbc:mysql://localhost:3306/trecanut?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC&nullCatalogMeansCurrent=true&autoReconnect=true&allowMultiQueries=true&useSSL=false&allowPublicKeyRetrieval=true
+          username: root  # 替换为你的数据库账号
+          password: 123456  # 替换为你的数据库密码
           driver-class-name: com.mysql.jdbc.Driver
+        slave:
+              url: jdbc:mysql://localhost:3306/trecanut?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC&nullCatalogMeansCurrent=true&autoReconnect=true&allowMultiQueries=true&useSSL=false&allowPublicKeyRetrieval=true
+              username: root
+              password: 123456
+              driver-class-name: com.mysql.jdbc.Driver
     druid:
       #监控统计拦截的filters
       filters: stat,wall,log4j
@@ -42,7 +42,9 @@ spring:
       poolPreparedStatements: false
       maxPoolPreparedStatementPerConnectionSize: 20
       # 通过connectProperties属性来打开mergeSql功能；慢SQL记录
-      connect-properties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+      connect-properties:
+        druid.stat.mergeSql: true
+        druid.stat.slowSqlMillis: 5000
   # redis配置
   redis:
     ssl: false

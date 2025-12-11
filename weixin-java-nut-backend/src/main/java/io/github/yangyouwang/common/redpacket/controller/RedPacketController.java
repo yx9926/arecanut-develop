@@ -1,6 +1,7 @@
 package io.github.yangyouwang.common.redpacket.controller;
 
 import io.github.yangyouwang.common.base.domain.Result;
+import io.github.yangyouwang.common.enums.ResultStatus;
 import io.github.yangyouwang.common.redpacket.entity.RedPacket;
 import io.github.yangyouwang.common.redpacket.service.RedPacketService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,9 +16,11 @@ public class RedPacketController {
     private RedPacketService redPacketService;
 
     @PostMapping("/set")
-    public Result setNewPacket(@RequestBody RedPacket redPacket){
-
-        redPacketService.setNewPacket(redPacket);
-        return Result.success("红包生成完毕（后续回显url");
+    public Result<String> setNewPacket(@RequestBody RedPacket redPacket){
+        String packetUrl = redPacketService.setNewPacket(redPacket);
+        if(packetUrl == null&& packetUrl.isEmpty()){
+            return Result.failure("创建红包失败");
+        }
+        return Result.success(ResultStatus.SUCCESS.message,packetUrl);
     }
 }

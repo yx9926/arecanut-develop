@@ -1,0 +1,217 @@
+[31m2025-12-11 05:24:15[0;39m [34mINFO [0;39m [31m[background-preinit][0;39m [1;35morg.hibernate.validator.internal.util.Version[0;39m [36mHV000001: Hibernate Validator 6.1.7.Final
+[0;39m[31m2025-12-11 05:24:15[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35mio.github.yangyouwang.CrudApplication[0;39m [36mStarting CrudApplication using Java 17.0.15 on huang with PID 3844 (D:\java\JavaCollection\arecanut\weixin-java-nut-backend\target\classes started by huang in D:\java\JavaCollection\arecanut)
+[0;39m[31m2025-12-11 05:24:15[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35mio.github.yangyouwang.CrudApplication[0;39m [36mThe following profiles are active: dev
+[0;39m[31m2025-12-11 05:24:18[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35morg.apache.coyote.http11.Http11NioProtocol[0;39m [36mInitializing ProtocolHandler ["http-nio-8080"]
+[0;39m[31m2025-12-11 05:24:18[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35morg.apache.catalina.core.StandardService[0;39m [36mStarting service [Tomcat]
+[0;39m[31m2025-12-11 05:24:18[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35morg.apache.catalina.core.StandardEngine[0;39m [36mStarting Servlet engine: [Apache Tomcat/9.0.44]
+[0;39m[31m2025-12-11 05:24:18[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35mo.a.c.core.ContainerBase.[Tomcat].[localhost].[/][0;39m [36mInitializing Spring embedded WebApplicationContext
+[0;39m[31m2025-12-11 05:24:18[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35mcom.alibaba.druid.pool.DruidDataSource[0;39m [36m{dataSource-1,master} inited
+[0;39m[31m2025-12-11 05:24:18[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35mcom.alibaba.druid.pool.DruidDataSource[0;39m [36m{dataSource-2,slave} inited
+[0;39m[31m2025-12-11 05:24:18[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35mc.b.dynamic.datasource.DynamicRoutingDataSource[0;39m [36mdynamic-datasource - add a datasource named [slave] success
+[0;39m[31m2025-12-11 05:24:18[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35mc.b.dynamic.datasource.DynamicRoutingDataSource[0;39m [36mdynamic-datasource - add a datasource named [master] success
+[0;39m[31m2025-12-11 05:24:18[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35mc.b.dynamic.datasource.DynamicRoutingDataSource[0;39m [36mdynamic-datasource initial loaded [2] datasource,primary datasource named [master]
+[0;39m[31m2025-12-11 05:24:20[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35morg.quartz.impl.StdSchedulerFactory[0;39m [36mUsing default implementation for ThreadExecutor
+[0;39m[31m2025-12-11 05:24:20[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35morg.quartz.core.SchedulerSignalerImpl[0;39m [36mInitialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+[0;39m[31m2025-12-11 05:24:20[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35morg.quartz.core.QuartzScheduler[0;39m [36mQuartz Scheduler v.2.3.2 created.
+[0;39m[31m2025-12-11 05:24:20[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35morg.quartz.simpl.RAMJobStore[0;39m [36mRAMJobStore initialized.
+[0;39m[31m2025-12-11 05:24:20[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35morg.quartz.core.QuartzScheduler[0;39m [36mScheduler meta-data: Quartz Scheduler (v2.3.2) 'Scheduler' with instanceId 'NON_CLUSTERED'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 20 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+[0;39m[31m2025-12-11 05:24:20[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35morg.quartz.impl.StdSchedulerFactory[0;39m [36mQuartz scheduler 'Scheduler' initialized from an externally provided properties instance.
+[0;39m[31m2025-12-11 05:24:20[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35morg.quartz.impl.StdSchedulerFactory[0;39m [36mQuartz scheduler version: 2.3.2
+[0;39m[31m2025-12-11 05:24:20[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35morg.quartz.core.QuartzScheduler[0;39m [36mJobFactory set to: io.github.yangyouwang.module.qrtz.util.job.JobFactory@766324fd
+[0;39m[31m2025-12-11 05:24:21[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35mi.g.y.f.w.v.CustomRequestMappingHandlerMapping[0;39m [36mCustomRequestMappingHandlerMapping Init...
+[0;39m[31m2025-12-11 05:24:21[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35ms.d.s.w.PropertySourcedRequestMappingHandlerMapping[0;39m [36mMapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+[0;39m[31m2025-12-11 05:24:22[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35morg.apache.coyote.http11.Http11NioProtocol[0;39m [36mStarting ProtocolHandler ["http-nio-8080"]
+[0;39m[31m2025-12-11 05:24:22[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35ms.d.s.web.plugins.DocumentationPluginsBootstrapper[0;39m [36mContext refreshed
+[0;39m[31m2025-12-11 05:24:22[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35ms.d.s.web.plugins.DocumentationPluginsBootstrapper[0;39m [36mFound 2 custom documentation plugin(s)
+[0;39m[31m2025-12-11 05:24:22[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35ms.d.spring.web.scanners.ApiListingReferenceScanner[0;39m [36mScanning for api listing references
+[0;39m[31m2025-12-11 05:24:22[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35ms.d.s.w.r.operation.CachingOperationNameGenerator[0;39m [36mGenerating unique operation named: addUsingPOST_1
+[0;39m[31m2025-12-11 05:24:22[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35ms.d.s.w.r.operation.CachingOperationNameGenerator[0;39m [36mGenerating unique operation named: modifyUsingPOST_1
+[0;39m[31m2025-12-11 05:24:22[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35ms.d.s.w.r.operation.CachingOperationNameGenerator[0;39m [36mGenerating unique operation named: pageUsingGET_1
+[0;39m[31m2025-12-11 05:24:22[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35ms.d.s.w.r.operation.CachingOperationNameGenerator[0;39m [36mGenerating unique operation named: removeUsingDELETE_1
+[0;39m[31m2025-12-11 05:24:22[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35ms.d.s.w.r.operation.CachingOperationNameGenerator[0;39m [36mGenerating unique operation named: removesUsingPOST_1
+[0;39m[31m2025-12-11 05:24:22[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35ms.d.s.w.r.operation.CachingOperationNameGenerator[0;39m [36mGenerating unique operation named: addUsingPOST_2
+[0;39m[31m2025-12-11 05:24:22[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35ms.d.s.w.r.operation.CachingOperationNameGenerator[0;39m [36mGenerating unique operation named: modifyUsingPOST_2
+[0;39m[31m2025-12-11 05:24:22[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35ms.d.s.w.r.operation.CachingOperationNameGenerator[0;39m [36mGenerating unique operation named: pageUsingGET_2
+[0;39m[31m2025-12-11 05:24:22[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35ms.d.s.w.r.operation.CachingOperationNameGenerator[0;39m [36mGenerating unique operation named: removeUsingDELETE_2
+[0;39m[31m2025-12-11 05:24:22[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35ms.d.s.w.r.operation.CachingOperationNameGenerator[0;39m [36mGenerating unique operation named: removesUsingPOST_2
+[0;39m[31m2025-12-11 05:24:22[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35ms.d.s.w.r.operation.CachingOperationNameGenerator[0;39m [36mGenerating unique operation named: addUsingPOST_3
+[0;39m[31m2025-12-11 05:24:22[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35ms.d.s.w.r.operation.CachingOperationNameGenerator[0;39m [36mGenerating unique operation named: modifyUsingPOST_3
+[0;39m[31m2025-12-11 05:24:22[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35ms.d.s.w.r.operation.CachingOperationNameGenerator[0;39m [36mGenerating unique operation named: pageUsingGET_3
+[0;39m[31m2025-12-11 05:24:22[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35ms.d.s.w.r.operation.CachingOperationNameGenerator[0;39m [36mGenerating unique operation named: removeUsingDELETE_3
+[0;39m[31m2025-12-11 05:24:22[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35ms.d.s.w.r.operation.CachingOperationNameGenerator[0;39m [36mGenerating unique operation named: removesUsingPOST_3
+[0;39m[31m2025-12-11 05:24:22[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35ms.d.s.w.r.operation.CachingOperationNameGenerator[0;39m [36mGenerating unique operation named: addUsingPOST_4
+[0;39m[31m2025-12-11 05:24:22[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35ms.d.s.w.r.operation.CachingOperationNameGenerator[0;39m [36mGenerating unique operation named: modifyUsingPOST_4
+[0;39m[31m2025-12-11 05:24:22[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35ms.d.s.w.r.operation.CachingOperationNameGenerator[0;39m [36mGenerating unique operation named: pageUsingGET_4
+[0;39m[31m2025-12-11 05:24:22[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35ms.d.s.w.r.operation.CachingOperationNameGenerator[0;39m [36mGenerating unique operation named: removeUsingDELETE_4
+[0;39m[31m2025-12-11 05:24:22[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35ms.d.s.w.r.operation.CachingOperationNameGenerator[0;39m [36mGenerating unique operation named: removesUsingPOST_4
+[0;39m[31m2025-12-11 05:24:22[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35ms.d.s.w.r.operation.CachingOperationNameGenerator[0;39m [36mGenerating unique operation named: useRedPacketUsingPOST_1
+[0;39m[31m2025-12-11 05:24:22[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35ms.d.s.w.r.operation.CachingOperationNameGenerator[0;39m [36mGenerating unique operation named: addUsingPOST_5
+[0;39m[31m2025-12-11 05:24:22[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35ms.d.s.w.r.operation.CachingOperationNameGenerator[0;39m [36mGenerating unique operation named: modifyUsingPOST_5
+[0;39m[31m2025-12-11 05:24:22[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35ms.d.s.w.r.operation.CachingOperationNameGenerator[0;39m [36mGenerating unique operation named: pageUsingGET_5
+[0;39m[31m2025-12-11 05:24:22[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35ms.d.s.w.r.operation.CachingOperationNameGenerator[0;39m [36mGenerating unique operation named: removeUsingDELETE_5
+[0;39m[31m2025-12-11 05:24:22[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35ms.d.s.w.r.operation.CachingOperationNameGenerator[0;39m [36mGenerating unique operation named: removesUsingPOST_5
+[0;39m[31m2025-12-11 05:24:22[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35ms.d.s.w.r.operation.CachingOperationNameGenerator[0;39m [36mGenerating unique operation named: removeUsingDELETE_6
+[0;39m[31m2025-12-11 05:24:22[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35ms.d.s.w.r.operation.CachingOperationNameGenerator[0;39m [36mGenerating unique operation named: removeUsingDELETE_7
+[0;39m[31m2025-12-11 05:24:22[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35ms.d.s.w.r.operation.CachingOperationNameGenerator[0;39m [36mGenerating unique operation named: removeUsingDELETE_8
+[0;39m[31m2025-12-11 05:24:22[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35ms.d.s.w.r.operation.CachingOperationNameGenerator[0;39m [36mGenerating unique operation named: removesUsingPOST_6
+[0;39m[31m2025-12-11 05:24:22[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35ms.d.s.w.r.operation.CachingOperationNameGenerator[0;39m [36mGenerating unique operation named: pageUsingGET_6
+[0;39m[31m2025-12-11 05:24:22[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35ms.d.s.w.r.operation.CachingOperationNameGenerator[0;39m [36mGenerating unique operation named: removeUsingDELETE_9
+[0;39m[31m2025-12-11 05:24:22[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35ms.d.s.w.r.operation.CachingOperationNameGenerator[0;39m [36mGenerating unique operation named: removesUsingPOST_7
+[0;39m[31m2025-12-11 05:24:22[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35ms.d.s.w.r.operation.CachingOperationNameGenerator[0;39m [36mGenerating unique operation named: removeUsingDELETE_10
+[0;39m[31m2025-12-11 05:24:22[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35ms.d.s.w.r.operation.CachingOperationNameGenerator[0;39m [36mGenerating unique operation named: addUsingPOST_6
+[0;39m[31m2025-12-11 05:24:22[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35ms.d.s.w.r.operation.CachingOperationNameGenerator[0;39m [36mGenerating unique operation named: modifyUsingPOST_6
+[0;39m[31m2025-12-11 05:24:22[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35ms.d.s.w.r.operation.CachingOperationNameGenerator[0;39m [36mGenerating unique operation named: pageUsingGET_7
+[0;39m[31m2025-12-11 05:24:22[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35ms.d.s.w.r.operation.CachingOperationNameGenerator[0;39m [36mGenerating unique operation named: removeUsingDELETE_11
+[0;39m[31m2025-12-11 05:24:22[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35ms.d.s.w.r.operation.CachingOperationNameGenerator[0;39m [36mGenerating unique operation named: removesUsingPOST_8
+[0;39m[31m2025-12-11 05:24:22[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35ms.d.s.w.r.operation.CachingOperationNameGenerator[0;39m [36mGenerating unique operation named: removeUsingDELETE_12
+[0;39m[31m2025-12-11 05:24:22[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35ms.d.s.w.r.operation.CachingOperationNameGenerator[0;39m [36mGenerating unique operation named: removesUsingPOST_9
+[0;39m[31m2025-12-11 05:24:22[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35ms.d.s.w.r.operation.CachingOperationNameGenerator[0;39m [36mGenerating unique operation named: removeUsingDELETE_13
+[0;39m[31m2025-12-11 05:24:22[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35ms.d.s.w.r.operation.CachingOperationNameGenerator[0;39m [36mGenerating unique operation named: removesUsingPOST_10
+[0;39m[31m2025-12-11 05:24:22[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35ms.d.s.w.r.operation.CachingOperationNameGenerator[0;39m [36mGenerating unique operation named: addUsingPOST_7
+[0;39m[31m2025-12-11 05:24:22[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35ms.d.s.w.r.operation.CachingOperationNameGenerator[0;39m [36mGenerating unique operation named: modifyUsingPOST_7
+[0;39m[31m2025-12-11 05:24:22[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35ms.d.s.w.r.operation.CachingOperationNameGenerator[0;39m [36mGenerating unique operation named: pageUsingGET_8
+[0;39m[31m2025-12-11 05:24:22[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35ms.d.s.w.r.operation.CachingOperationNameGenerator[0;39m [36mGenerating unique operation named: removeUsingDELETE_14
+[0;39m[31m2025-12-11 05:24:22[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35ms.d.s.w.r.operation.CachingOperationNameGenerator[0;39m [36mGenerating unique operation named: removesUsingPOST_11
+[0;39m[31m2025-12-11 05:24:22[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35ms.d.s.w.r.operation.CachingOperationNameGenerator[0;39m [36mGenerating unique operation named: closeOrderUsingGET_1
+[0;39m[31m2025-12-11 05:24:22[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35ms.d.s.w.r.operation.CachingOperationNameGenerator[0;39m [36mGenerating unique operation named: closeOrderUsingPOST_1
+[0;39m[31m2025-12-11 05:24:22[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35ms.d.s.w.r.operation.CachingOperationNameGenerator[0;39m [36mGenerating unique operation named: createOrderUsingPOST_1
+[0;39m[31m2025-12-11 05:24:22[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35ms.d.s.w.r.operation.CachingOperationNameGenerator[0;39m [36mGenerating unique operation named: parseOrderNotifyResultUsingPOST_1
+[0;39m[31m2025-12-11 05:24:22[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35ms.d.s.w.r.operation.CachingOperationNameGenerator[0;39m [36mGenerating unique operation named: parseRefundNotifyResultUsingPOST_1
+[0;39m[31m2025-12-11 05:24:22[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35ms.d.s.w.r.operation.CachingOperationNameGenerator[0;39m [36mGenerating unique operation named: queryOrderUsingPOST_1
+[0;39m[31m2025-12-11 05:24:22[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35ms.d.s.w.r.operation.CachingOperationNameGenerator[0;39m [36mGenerating unique operation named: queryOrderUsingGET_1
+[0;39m[31m2025-12-11 05:24:22[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35ms.d.s.w.r.operation.CachingOperationNameGenerator[0;39m [36mGenerating unique operation named: refundUsingPOST_1
+[0;39m[31m2025-12-11 05:24:22[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35ms.d.s.w.r.operation.CachingOperationNameGenerator[0;39m [36mGenerating unique operation named: refundQueryUsingGET_1
+[0;39m[31m2025-12-11 05:24:22[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35ms.d.s.w.r.operation.CachingOperationNameGenerator[0;39m [36mGenerating unique operation named: refundQueryUsingPOST_1
+[0;39m[31m2025-12-11 05:24:22[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35ms.d.spring.web.scanners.ApiListingReferenceScanner[0;39m [36mScanning for api listing references
+[0;39m[31m2025-12-11 05:24:22[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35mi.github.yangyouwang.framework.config.ServerConfig[0;39m [36m
+----------------------------------------------------------
+	Application is running! Access URLs:
+	访问网址:http://10.61.142.21:8080
+----------------------------------------------------------
+[0;39m[31m2025-12-11 05:24:22[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35mio.github.yangyouwang.CrudApplication[0;39m [36mStarted CrudApplication in 7.304 seconds (JVM running for 9.618)
+[0;39m[31m2025-12-11 05:24:23[0;39m [34mINFO [0;39m [31m[Quartz Scheduler [Scheduler]][0;39m [1;35morg.quartz.core.QuartzScheduler[0;39m [36mScheduler Scheduler_$_NON_CLUSTERED started.
+[0;39m[31m2025-12-11 05:24:26[0;39m [34mINFO [0;39m [31m[http-nio-8080-exec-1][0;39m [1;35mo.a.c.core.ContainerBase.[Tomcat].[localhost].[/][0;39m [36mInitializing Spring DispatcherServlet 'dispatcherServlet'
+[0;39m[31m2025-12-11 05:24:48[0;39m [34mINFO [0;39m [31m[http-nio-8080-exec-5][0;39m [1;35mi.g.y.f.s.h.DefaultAuthenticationSuccessHandler[0;39m [36m----login in succcess----
+[0;39m[31m2025-12-11 05:25:45[0;39m [34mINFO [0;39m [31m[SpringContextShutdownHook][0;39m [1;35morg.quartz.core.QuartzScheduler[0;39m [36mScheduler Scheduler_$_NON_CLUSTERED paused.
+[0;39m[31m2025-12-11 05:25:46[0;39m [34mINFO [0;39m [31m[SpringContextShutdownHook][0;39m [1;35morg.quartz.core.QuartzScheduler[0;39m [36mScheduler Scheduler_$_NON_CLUSTERED shutting down.
+[0;39m[31m2025-12-11 05:25:46[0;39m [34mINFO [0;39m [31m[SpringContextShutdownHook][0;39m [1;35morg.quartz.core.QuartzScheduler[0;39m [36mScheduler Scheduler_$_NON_CLUSTERED paused.
+[0;39m[31m2025-12-11 05:25:46[0;39m [34mINFO [0;39m [31m[SpringContextShutdownHook][0;39m [1;35morg.quartz.core.QuartzScheduler[0;39m [36mScheduler Scheduler_$_NON_CLUSTERED shutdown complete.
+[0;39m[31m2025-12-11 05:25:46[0;39m [34mINFO [0;39m [31m[SpringContextShutdownHook][0;39m [1;35mc.b.dynamic.datasource.DynamicRoutingDataSource[0;39m [36mdynamic-datasource start closing ....
+[0;39m[31m2025-12-11 05:25:46[0;39m [34mINFO [0;39m [31m[SpringContextShutdownHook][0;39m [1;35mcom.alibaba.druid.pool.DruidDataSource[0;39m [36m{dataSource-2} closed
+[0;39m[31m2025-12-11 05:25:46[0;39m [34mINFO [0;39m [31m[SpringContextShutdownHook][0;39m [1;35mcom.alibaba.druid.pool.DruidDataSource[0;39m [36m{dataSource-1} closed
+[0;39m[31m2025-12-11 05:25:46[0;39m [34mINFO [0;39m [31m[SpringContextShutdownHook][0;39m [1;35mc.b.dynamic.datasource.DynamicRoutingDataSource[0;39m [36mdynamic-datasource all closed success,bye
+[0;39m[31m2025-12-11 05:54:09[0;39m [34mINFO [0;39m [31m[background-preinit][0;39m [1;35morg.hibernate.validator.internal.util.Version[0;39m [36mHV000001: Hibernate Validator 6.1.7.Final
+[0;39m[31m2025-12-11 05:54:09[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35mio.github.yangyouwang.CrudApplication[0;39m [36mStarting CrudApplication using Java 17.0.15 on huang with PID 13300 (D:\java\JavaCollection\arecanut\weixin-java-nut-backend\target\classes started by huang in D:\java\JavaCollection\arecanut)
+[0;39m[31m2025-12-11 05:54:09[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35mio.github.yangyouwang.CrudApplication[0;39m [36mThe following profiles are active: dev
+[0;39m[31m2025-12-11 05:54:11[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35morg.apache.coyote.http11.Http11NioProtocol[0;39m [36mInitializing ProtocolHandler ["http-nio-8080"]
+[0;39m[31m2025-12-11 05:54:11[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35morg.apache.catalina.core.StandardService[0;39m [36mStarting service [Tomcat]
+[0;39m[31m2025-12-11 05:54:11[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35morg.apache.catalina.core.StandardEngine[0;39m [36mStarting Servlet engine: [Apache Tomcat/9.0.44]
+[0;39m[31m2025-12-11 05:54:11[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35mo.a.c.core.ContainerBase.[Tomcat].[localhost].[/][0;39m [36mInitializing Spring embedded WebApplicationContext
+[0;39m[31m2025-12-11 05:54:11[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35mcom.alibaba.druid.pool.DruidDataSource[0;39m [36m{dataSource-1,master} inited
+[0;39m[31m2025-12-11 05:54:11[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35mcom.alibaba.druid.pool.DruidDataSource[0;39m [36m{dataSource-2,slave} inited
+[0;39m[31m2025-12-11 05:54:11[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35mc.b.dynamic.datasource.DynamicRoutingDataSource[0;39m [36mdynamic-datasource - add a datasource named [slave] success
+[0;39m[31m2025-12-11 05:54:11[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35mc.b.dynamic.datasource.DynamicRoutingDataSource[0;39m [36mdynamic-datasource - add a datasource named [master] success
+[0;39m[31m2025-12-11 05:54:11[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35mc.b.dynamic.datasource.DynamicRoutingDataSource[0;39m [36mdynamic-datasource initial loaded [2] datasource,primary datasource named [master]
+[0;39m[31m2025-12-11 05:54:13[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35morg.quartz.impl.StdSchedulerFactory[0;39m [36mUsing default implementation for ThreadExecutor
+[0;39m[31m2025-12-11 05:54:13[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35morg.quartz.core.SchedulerSignalerImpl[0;39m [36mInitialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+[0;39m[31m2025-12-11 05:54:13[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35morg.quartz.core.QuartzScheduler[0;39m [36mQuartz Scheduler v.2.3.2 created.
+[0;39m[31m2025-12-11 05:54:13[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35morg.quartz.simpl.RAMJobStore[0;39m [36mRAMJobStore initialized.
+[0;39m[31m2025-12-11 05:54:13[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35morg.quartz.core.QuartzScheduler[0;39m [36mScheduler meta-data: Quartz Scheduler (v2.3.2) 'Scheduler' with instanceId 'NON_CLUSTERED'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 20 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+[0;39m[31m2025-12-11 05:54:13[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35morg.quartz.impl.StdSchedulerFactory[0;39m [36mQuartz scheduler 'Scheduler' initialized from an externally provided properties instance.
+[0;39m[31m2025-12-11 05:54:13[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35morg.quartz.impl.StdSchedulerFactory[0;39m [36mQuartz scheduler version: 2.3.2
+[0;39m[31m2025-12-11 05:54:13[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35morg.quartz.core.QuartzScheduler[0;39m [36mJobFactory set to: io.github.yangyouwang.module.qrtz.util.job.JobFactory@19880c27
+[0;39m[31m2025-12-11 05:54:14[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35mi.g.y.f.w.v.CustomRequestMappingHandlerMapping[0;39m [36mCustomRequestMappingHandlerMapping Init...
+[0;39m[31m2025-12-11 05:54:15[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35ms.d.s.w.PropertySourcedRequestMappingHandlerMapping[0;39m [36mMapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+[0;39m[31m2025-12-11 05:54:15[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35morg.apache.coyote.http11.Http11NioProtocol[0;39m [36mStarting ProtocolHandler ["http-nio-8080"]
+[0;39m[31m2025-12-11 05:54:15[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35ms.d.s.web.plugins.DocumentationPluginsBootstrapper[0;39m [36mContext refreshed
+[0;39m[31m2025-12-11 05:54:16[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35ms.d.s.web.plugins.DocumentationPluginsBootstrapper[0;39m [36mFound 2 custom documentation plugin(s)
+[0;39m[31m2025-12-11 05:54:16[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35ms.d.spring.web.scanners.ApiListingReferenceScanner[0;39m [36mScanning for api listing references
+[0;39m[31m2025-12-11 05:54:16[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35ms.d.s.w.r.operation.CachingOperationNameGenerator[0;39m [36mGenerating unique operation named: addUsingPOST_1
+[0;39m[31m2025-12-11 05:54:16[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35ms.d.s.w.r.operation.CachingOperationNameGenerator[0;39m [36mGenerating unique operation named: modifyUsingPOST_1
+[0;39m[31m2025-12-11 05:54:16[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35ms.d.s.w.r.operation.CachingOperationNameGenerator[0;39m [36mGenerating unique operation named: pageUsingGET_1
+[0;39m[31m2025-12-11 05:54:16[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35ms.d.s.w.r.operation.CachingOperationNameGenerator[0;39m [36mGenerating unique operation named: removeUsingDELETE_1
+[0;39m[31m2025-12-11 05:54:16[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35ms.d.s.w.r.operation.CachingOperationNameGenerator[0;39m [36mGenerating unique operation named: removesUsingPOST_1
+[0;39m[31m2025-12-11 05:54:16[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35ms.d.s.w.r.operation.CachingOperationNameGenerator[0;39m [36mGenerating unique operation named: addUsingPOST_2
+[0;39m[31m2025-12-11 05:54:16[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35ms.d.s.w.r.operation.CachingOperationNameGenerator[0;39m [36mGenerating unique operation named: modifyUsingPOST_2
+[0;39m[31m2025-12-11 05:54:16[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35ms.d.s.w.r.operation.CachingOperationNameGenerator[0;39m [36mGenerating unique operation named: pageUsingGET_2
+[0;39m[31m2025-12-11 05:54:16[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35ms.d.s.w.r.operation.CachingOperationNameGenerator[0;39m [36mGenerating unique operation named: removeUsingDELETE_2
+[0;39m[31m2025-12-11 05:54:16[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35ms.d.s.w.r.operation.CachingOperationNameGenerator[0;39m [36mGenerating unique operation named: removesUsingPOST_2
+[0;39m[31m2025-12-11 05:54:16[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35ms.d.s.w.r.operation.CachingOperationNameGenerator[0;39m [36mGenerating unique operation named: addUsingPOST_3
+[0;39m[31m2025-12-11 05:54:16[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35ms.d.s.w.r.operation.CachingOperationNameGenerator[0;39m [36mGenerating unique operation named: modifyUsingPOST_3
+[0;39m[31m2025-12-11 05:54:16[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35ms.d.s.w.r.operation.CachingOperationNameGenerator[0;39m [36mGenerating unique operation named: pageUsingGET_3
+[0;39m[31m2025-12-11 05:54:16[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35ms.d.s.w.r.operation.CachingOperationNameGenerator[0;39m [36mGenerating unique operation named: removeUsingDELETE_3
+[0;39m[31m2025-12-11 05:54:16[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35ms.d.s.w.r.operation.CachingOperationNameGenerator[0;39m [36mGenerating unique operation named: removesUsingPOST_3
+[0;39m[31m2025-12-11 05:54:16[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35ms.d.s.w.r.operation.CachingOperationNameGenerator[0;39m [36mGenerating unique operation named: addUsingPOST_4
+[0;39m[31m2025-12-11 05:54:16[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35ms.d.s.w.r.operation.CachingOperationNameGenerator[0;39m [36mGenerating unique operation named: modifyUsingPOST_4
+[0;39m[31m2025-12-11 05:54:16[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35ms.d.s.w.r.operation.CachingOperationNameGenerator[0;39m [36mGenerating unique operation named: pageUsingGET_4
+[0;39m[31m2025-12-11 05:54:16[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35ms.d.s.w.r.operation.CachingOperationNameGenerator[0;39m [36mGenerating unique operation named: removeUsingDELETE_4
+[0;39m[31m2025-12-11 05:54:16[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35ms.d.s.w.r.operation.CachingOperationNameGenerator[0;39m [36mGenerating unique operation named: removesUsingPOST_4
+[0;39m[31m2025-12-11 05:54:16[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35ms.d.s.w.r.operation.CachingOperationNameGenerator[0;39m [36mGenerating unique operation named: useRedPacketUsingPOST_1
+[0;39m[31m2025-12-11 05:54:16[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35ms.d.s.w.r.operation.CachingOperationNameGenerator[0;39m [36mGenerating unique operation named: addUsingPOST_5
+[0;39m[31m2025-12-11 05:54:16[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35ms.d.s.w.r.operation.CachingOperationNameGenerator[0;39m [36mGenerating unique operation named: modifyUsingPOST_5
+[0;39m[31m2025-12-11 05:54:16[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35ms.d.s.w.r.operation.CachingOperationNameGenerator[0;39m [36mGenerating unique operation named: pageUsingGET_5
+[0;39m[31m2025-12-11 05:54:16[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35ms.d.s.w.r.operation.CachingOperationNameGenerator[0;39m [36mGenerating unique operation named: removeUsingDELETE_5
+[0;39m[31m2025-12-11 05:54:16[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35ms.d.s.w.r.operation.CachingOperationNameGenerator[0;39m [36mGenerating unique operation named: removesUsingPOST_5
+[0;39m[31m2025-12-11 05:54:16[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35ms.d.s.w.r.operation.CachingOperationNameGenerator[0;39m [36mGenerating unique operation named: removeUsingDELETE_6
+[0;39m[31m2025-12-11 05:54:16[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35ms.d.s.w.r.operation.CachingOperationNameGenerator[0;39m [36mGenerating unique operation named: removeUsingDELETE_7
+[0;39m[31m2025-12-11 05:54:16[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35ms.d.s.w.r.operation.CachingOperationNameGenerator[0;39m [36mGenerating unique operation named: removeUsingDELETE_8
+[0;39m[31m2025-12-11 05:54:16[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35ms.d.s.w.r.operation.CachingOperationNameGenerator[0;39m [36mGenerating unique operation named: removesUsingPOST_6
+[0;39m[31m2025-12-11 05:54:16[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35ms.d.s.w.r.operation.CachingOperationNameGenerator[0;39m [36mGenerating unique operation named: pageUsingGET_6
+[0;39m[31m2025-12-11 05:54:16[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35ms.d.s.w.r.operation.CachingOperationNameGenerator[0;39m [36mGenerating unique operation named: removeUsingDELETE_9
+[0;39m[31m2025-12-11 05:54:16[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35ms.d.s.w.r.operation.CachingOperationNameGenerator[0;39m [36mGenerating unique operation named: removesUsingPOST_7
+[0;39m[31m2025-12-11 05:54:16[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35ms.d.s.w.r.operation.CachingOperationNameGenerator[0;39m [36mGenerating unique operation named: removeUsingDELETE_10
+[0;39m[31m2025-12-11 05:54:16[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35ms.d.s.w.r.operation.CachingOperationNameGenerator[0;39m [36mGenerating unique operation named: addUsingPOST_6
+[0;39m[31m2025-12-11 05:54:16[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35ms.d.s.w.r.operation.CachingOperationNameGenerator[0;39m [36mGenerating unique operation named: modifyUsingPOST_6
+[0;39m[31m2025-12-11 05:54:16[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35ms.d.s.w.r.operation.CachingOperationNameGenerator[0;39m [36mGenerating unique operation named: pageUsingGET_7
+[0;39m[31m2025-12-11 05:54:16[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35ms.d.s.w.r.operation.CachingOperationNameGenerator[0;39m [36mGenerating unique operation named: removeUsingDELETE_11
+[0;39m[31m2025-12-11 05:54:16[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35ms.d.s.w.r.operation.CachingOperationNameGenerator[0;39m [36mGenerating unique operation named: removesUsingPOST_8
+[0;39m[31m2025-12-11 05:54:16[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35ms.d.s.w.r.operation.CachingOperationNameGenerator[0;39m [36mGenerating unique operation named: removeUsingDELETE_12
+[0;39m[31m2025-12-11 05:54:16[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35ms.d.s.w.r.operation.CachingOperationNameGenerator[0;39m [36mGenerating unique operation named: removesUsingPOST_9
+[0;39m[31m2025-12-11 05:54:16[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35ms.d.s.w.r.operation.CachingOperationNameGenerator[0;39m [36mGenerating unique operation named: removeUsingDELETE_13
+[0;39m[31m2025-12-11 05:54:16[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35ms.d.s.w.r.operation.CachingOperationNameGenerator[0;39m [36mGenerating unique operation named: removesUsingPOST_10
+[0;39m[31m2025-12-11 05:54:16[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35ms.d.s.w.r.operation.CachingOperationNameGenerator[0;39m [36mGenerating unique operation named: addUsingPOST_7
+[0;39m[31m2025-12-11 05:54:16[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35ms.d.s.w.r.operation.CachingOperationNameGenerator[0;39m [36mGenerating unique operation named: modifyUsingPOST_7
+[0;39m[31m2025-12-11 05:54:16[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35ms.d.s.w.r.operation.CachingOperationNameGenerator[0;39m [36mGenerating unique operation named: pageUsingGET_8
+[0;39m[31m2025-12-11 05:54:16[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35ms.d.s.w.r.operation.CachingOperationNameGenerator[0;39m [36mGenerating unique operation named: removeUsingDELETE_14
+[0;39m[31m2025-12-11 05:54:16[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35ms.d.s.w.r.operation.CachingOperationNameGenerator[0;39m [36mGenerating unique operation named: removesUsingPOST_11
+[0;39m[31m2025-12-11 05:54:16[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35ms.d.s.w.r.operation.CachingOperationNameGenerator[0;39m [36mGenerating unique operation named: closeOrderUsingGET_1
+[0;39m[31m2025-12-11 05:54:16[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35ms.d.s.w.r.operation.CachingOperationNameGenerator[0;39m [36mGenerating unique operation named: closeOrderUsingPOST_1
+[0;39m[31m2025-12-11 05:54:16[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35ms.d.s.w.r.operation.CachingOperationNameGenerator[0;39m [36mGenerating unique operation named: createOrderUsingPOST_1
+[0;39m[31m2025-12-11 05:54:16[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35ms.d.s.w.r.operation.CachingOperationNameGenerator[0;39m [36mGenerating unique operation named: parseOrderNotifyResultUsingPOST_1
+[0;39m[31m2025-12-11 05:54:16[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35ms.d.s.w.r.operation.CachingOperationNameGenerator[0;39m [36mGenerating unique operation named: parseRefundNotifyResultUsingPOST_1
+[0;39m[31m2025-12-11 05:54:16[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35ms.d.s.w.r.operation.CachingOperationNameGenerator[0;39m [36mGenerating unique operation named: queryOrderUsingPOST_1
+[0;39m[31m2025-12-11 05:54:16[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35ms.d.s.w.r.operation.CachingOperationNameGenerator[0;39m [36mGenerating unique operation named: queryOrderUsingGET_1
+[0;39m[31m2025-12-11 05:54:16[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35ms.d.s.w.r.operation.CachingOperationNameGenerator[0;39m [36mGenerating unique operation named: refundUsingPOST_1
+[0;39m[31m2025-12-11 05:54:16[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35ms.d.s.w.r.operation.CachingOperationNameGenerator[0;39m [36mGenerating unique operation named: refundQueryUsingGET_1
+[0;39m[31m2025-12-11 05:54:16[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35ms.d.s.w.r.operation.CachingOperationNameGenerator[0;39m [36mGenerating unique operation named: refundQueryUsingPOST_1
+[0;39m[31m2025-12-11 05:54:16[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35ms.d.spring.web.scanners.ApiListingReferenceScanner[0;39m [36mScanning for api listing references
+[0;39m[31m2025-12-11 05:54:16[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35mi.github.yangyouwang.framework.config.ServerConfig[0;39m [36m
+----------------------------------------------------------
+	Application is running! Access URLs:
+	访问网址:http://10.61.142.21:8080
+----------------------------------------------------------
+[0;39m[31m2025-12-11 05:54:16[0;39m [34mINFO [0;39m [31m[restartedMain][0;39m [1;35mio.github.yangyouwang.CrudApplication[0;39m [36mStarted CrudApplication in 7.653 seconds (JVM running for 8.827)
+[0;39m[31m2025-12-11 05:54:17[0;39m [34mINFO [0;39m [31m[Quartz Scheduler [Scheduler]][0;39m [1;35morg.quartz.core.QuartzScheduler[0;39m [36mScheduler Scheduler_$_NON_CLUSTERED started.
+[0;39m[31m2025-12-11 05:54:21[0;39m [34mINFO [0;39m [31m[SpringContextShutdownHook][0;39m [1;35morg.quartz.core.QuartzScheduler[0;39m [36mScheduler Scheduler_$_NON_CLUSTERED paused.
+[0;39m[31m2025-12-11 05:54:21[0;39m [34mINFO [0;39m [31m[SpringContextShutdownHook][0;39m [1;35morg.quartz.core.QuartzScheduler[0;39m [36mScheduler Scheduler_$_NON_CLUSTERED shutting down.
+[0;39m[31m2025-12-11 05:54:21[0;39m [34mINFO [0;39m [31m[SpringContextShutdownHook][0;39m [1;35morg.quartz.core.QuartzScheduler[0;39m [36mScheduler Scheduler_$_NON_CLUSTERED paused.
+[0;39m[31m2025-12-11 05:54:21[0;39m [34mINFO [0;39m [31m[SpringContextShutdownHook][0;39m [1;35morg.quartz.core.QuartzScheduler[0;39m [36mScheduler Scheduler_$_NON_CLUSTERED shutdown complete.
+[0;39m[31m2025-12-11 05:54:21[0;39m [34mINFO [0;39m [31m[SpringContextShutdownHook][0;39m [1;35mc.b.dynamic.datasource.DynamicRoutingDataSource[0;39m [36mdynamic-datasource start closing ....
+[0;39m[31m2025-12-11 05:54:21[0;39m [34mINFO [0;39m [31m[SpringContextShutdownHook][0;39m [1;35mcom.alibaba.druid.pool.DruidDataSource[0;39m [36m{dataSource-2} closed
+[0;39m[31m2025-12-11 05:54:21[0;39m [34mINFO [0;39m [31m[SpringContextShutdownHook][0;39m [1;35mcom.alibaba.druid.pool.DruidDataSource[0;39m [36m{dataSource-1} closed
+[0;39m[31m2025-12-11 05:54:21[0;39m [34mINFO [0;39m [31m[SpringContextShutdownHook][0;39m [1;35mc.b.dynamic.datasource.DynamicRoutingDataSource[0;39m [36mdynamic-datasource all closed success,bye
+[0;39m
